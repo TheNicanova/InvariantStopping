@@ -1,0 +1,28 @@
+# Julia artifacts
+*.ji
+*.o
+*.a
+*.dylib
+*.dll
+*.so
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+*~
+
+# OS-specific files
+.DS_Store           # macOS
+Thumbs.db           # Windows
+Desktop.ini         # Windows
+*.lnk               # Windows
+
+# IDE-specific files (like VSCode)
+.vscode/
+
+# Julia environments
+Manifest.toml
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
