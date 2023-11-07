@@ -1,7 +1,11 @@
 """
     Sample
 
-Abstract type representing a realization.
+Abstract type representing a realization. 
+
+!!! Note 
+The Sample object can be thought as a dictionary where the elements of the Schedule object are the keys and where the states are the items. One samples a random dictionary from schedule to state.
+
 """
 abstract type Sample{S <: State, T <: Schedule} end
 
