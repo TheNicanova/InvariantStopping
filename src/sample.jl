@@ -33,6 +33,8 @@ end
 
 get_time(sample::Sample) = return get_time(sample.state)
 
+get_coord(sample::Sample) = return get_coord(sample.state)
+
 """
     Sample(::State, ::Schedule, ::UnderlyingModel)
 
@@ -62,3 +64,4 @@ function Sample(initial::State, schedule::NodeSchedule, underlying_model::Underl
   children = Tuple(Sample(forward_to(initial, child, underlying_model), child, underlying_model) for child in get_children(schedule))
   return NodeSample(initial, schedule, underlying_model, children)
 end
+

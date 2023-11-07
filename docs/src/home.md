@@ -34,16 +34,7 @@ julia> schedule = Schedule(LinRange(0.0, 10, 20))
 julia> underlying_model = GeometricBrownianMotion(3,4,5); #rate, sigma, dividend
 ```
 
-The underlying_model, starting from the initial_state, will generate states at future times specified by the schedule.
-
-```julia
-julia> sample = Sample(initial_state, schedule, underlying_model)
-```
-This produces a Sample object. For states with a single spatial dimension, one can plot the Sample object.
-
-```julia
-julia> plot(sample)
-```
+The underlying_model, starting from the initialgit 
 
 ### Pricing
 

@@ -1,22 +1,6 @@
 module InvariantStopping
 
-export State
-
-export StoppingPolicy
-
-export DeterministicStopping
-export StoppingTime
-
-export Schedule
-export LeafSchedule
-export NodeSchedule
-
-export UnderlyingModel
-export GeometricBrownianMotion
-
-export Sample
-export LeafSample
-export NodeSample
+using Distributions
 
 include("state.jl")
 
@@ -28,10 +12,33 @@ include("underlying_model.jl")
 
 include("sample.jl")
 
-using Distributions
+include("plot.jl")
+
 
 # Fix the Union{Nothing, ...} so we can write the constructor sample(initial, underlying_model, schedule)::Sample
 # initial time needs to agree with schedule time. Perhaps have a rootsample, rootschedule.
+
+export State
+
+export StoppingPolicy
+
+export DeterministicStopping
+export StoppingTime
+
+export Schedule
+export LeafSchedule
+export NodeSchedule
+export Star
+export Tree
+
+export UnderlyingModel
+export GeometricBrownianMotion
+
+export Sample
+export LeafSample
+export NodeSample
+
+export plot
 
 export forward_to
 
