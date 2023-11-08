@@ -15,5 +15,5 @@ makedocs(
 )
 
 deploydocs(
-    repo = "github.com/TheNicanova/InvariantStopping.jl.git",
+    repo = "github.com/TheNicanova/InvariantStopping.git",
 )
