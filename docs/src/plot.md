@@ -4,3 +4,6 @@
 plot(::Sample)
 ```
 
+```@docs
+plot(::Any, ::NodeSample)
+```

@@ -41,11 +41,11 @@ function plot(sample::Sample)
 end
 
 """
-    plot(::Sample, ::Integer)
+    plot(::Any, ::NodeSample)
 
 A helper function for recursively plotting trajectories.
 """
-function plot(p, sample::NodeSample)
+function plot(p::Any, sample::NodeSample)
   start_time = get_time(sample)
   start_coord = get_coord(sample)[1]
   for child in sample.children

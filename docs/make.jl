@@ -1,12 +1,11 @@
 using Documenter, InvariantStopping
 
-
 makedocs(
   sitename="InvariantStopping.jl",
   modules=[InvariantStopping], 
   format=Documenter.HTML(),
   pages=[
-    "Home" => "home.md",
+    "Home" => "index.md",
     "Type" => "type.md",
     "Method" => "method.md",
     "Plotting" => "plot.md",

@@ -27,35 +27,6 @@ For objects of greater complexity, consider adding sections like `# Notes`, `# R
 ## 7. **Markdown Support**
 Use Markdown formatting for clarity and emphasis. This includes **bold**, *italic*, and [links](#).
 
-### Example:
-
-The following 
-
-```julia
-"""
-    calculate(x, y; z=1.0)
-
-Calculate the result based on inputs `x`, `y`, and an optional parameter `z`.
-
-# Arguments
-- `x`: The first input (should be a positive integer).
-- `y`: The second input (should be a non-zero integer).
-- `z`: An optional parameter with a default value of 1.0.
-
-# Returns
-- A floating-point number representing the result.
-
-# Examples
-    calculate(5, 3)
-    calculate(5, 3, z=2.5)
-"""
-```
-
-willproduce the following entry.
-
-```@docs
-calculate(x, y; z=1.0)
-```
 
 
 
