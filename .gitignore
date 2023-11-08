@@ -22,7 +22,7 @@ Desktop.ini         # Windows
 .vscode/
 
 # Julia environments
-Manifest.toml
+#Manifest.toml
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
