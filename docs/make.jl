@@ -13,3 +13,7 @@ makedocs(
     "Appendix: Docstring Guidelines" => "docstring_guidelines.md"
   ]
 )
+
+deploydocs(
+    repo = "github.com/TheNicanova/InvariantStopping.jl.git",
+)

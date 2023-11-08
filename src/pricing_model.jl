@@ -14,4 +14,3 @@ An abstract type representing pricing algorithms that recursively operate at the
 abstract type LayerPricingModel <: PricingModel end
 
 
-
