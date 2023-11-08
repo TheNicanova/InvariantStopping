@@ -16,4 +16,5 @@ makedocs(
 
 deploydocs(
     repo = "github.com/TheNicanova/InvariantStopping.git",
+    push_preview = true, # This can be set to false to only deploy on new tags or commits to main/master
 )
