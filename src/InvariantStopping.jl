@@ -28,6 +28,7 @@ export StoppingTime
 export Schedule
 export LeafSchedule
 export NodeSchedule
+export RootSchedule
 export Star
 export Tree
 
@@ -37,6 +38,7 @@ export GeometricBrownianMotion
 export Sample
 export LeafSample
 export NodeSample
+export RootSample
 
 export plot
 
@@ -76,3 +78,6 @@ function forward_to(initial::State, forward_schedule::Schedule, underlying_model
 end
 
 end
+
+
+#function price(sample::Sample, pricing_model::PricingModel, option::Option) end

@@ -1,4 +1,4 @@
-using Gadfly
+import Gadfly
 
 """
     plot(::Sample)
@@ -34,10 +34,15 @@ plot(sample)
 """
 function plot(sample::Sample)
   p = Gadfly.plot()
-  push!(p, Guide.title("A sample"))
-  push!(p, Guide.xlabel("Time"), Guide.ylabel("Coord"))
+  push!(p, Gadfly.Guide.title("A sample"))
+  push!(p, Gadfly.Guide.xlabel("Time"), Gadfly.Guide.ylabel("Coord"))
   plot(p, sample)
   return p
+end
+
+
+function plot(layered_sample::LayeredSample)
+  plot(layered_sample.sample)
 end
 
 """
@@ -45,13 +50,13 @@ end
 
 A helper function for recursively plotting trajectories.
 """
-function plot(p::Any, sample::NodeSample)
+function plot(p::Any, sample::Union{RootSample, NodeSample})
   start_time = get_time(sample)
   start_coord = get_coord(sample)[1]
   for child in sample.children
     end_time = get_time(child)
     end_coord = get_coord(child)[1]
-    push!(p, layer(x=[start_time,end_time], y=[start_coord, end_coord], Geom.line))
+    push!(p, Gadfly.layer(x=[start_time,end_time], y=[start_coord, end_coord],Gadfly.Geom.line))
     plot(p, child)
   end
 end

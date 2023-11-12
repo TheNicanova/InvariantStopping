@@ -5,3 +5,4 @@ version = "0.1.0"
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 Gadfly = "c91e804a-d5a3-530f-b6f0-dfbca275c004"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
