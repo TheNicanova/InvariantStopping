@@ -28,8 +28,11 @@ end
 """
     AtomicStopping <: StoppingTime
 
-This type represents stopping times that stop at a single fixed time if and only if the trajectory is satisfies a list of conditions.
-It takes a time parameter as well as a list of time-condition pairs.
+This type represents stopping times that stop at a single fixed time if and only if the provided trajectory is satisfies a list of conditions.
+It takes a time parameter, a list of times at which the sampled state will be needed, a condition that takes for input a list of states and returns a boolean value.
+
+!!! comment
+It might help to consider an [`AtomicStopping`](@ref) as a *stopping opportunity*.
 
 Examples
 ```jldoctest
@@ -38,14 +41,15 @@ julia> atomic_stopping = AtomicStopping(3.0, [(1.0, x -> get_coord(x[1] > 1))]);
 """
 struct AtomicStopping{T <: Number, F <: Function} <: StoppingTime
     time::T
-    condition_list::Vector{<:Tuple{T,F}}
+    time_list::Vector{T}
+    condition::F
 end
 
 """
     CompositeStopping <: StoppingTime
 
-This type represents stopping times that can stop a any time in a list of fixed times. 
-A composite stopping time is a *sorted* list of [`AtomicStopping`](@ref) and it stops when the first atomic stopping in the list stops.
+This type represents stopping times that can stop at any time in a list of fixed times. 
+A composite stopping time is a *sorted* list of [`AtomicStopping`](@ref) and it stops at the first [`AtomicStopping`](@ref) that is satisfied.
 Any generic stopping time can be represented as a composite time.  
 
 Examples
