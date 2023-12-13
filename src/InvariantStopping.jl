@@ -2,17 +2,19 @@ module InvariantStopping
 
 using Distributions
 
-include("state.jl")
+include("Sampler/state.jl")
 
-include("stopping_policy.jl")
+include("Sampler/stopping_time.jl")
 
-include("schedule.jl")
+include("Sampler/schedule.jl")
 
-include("underlying_model.jl")
+include("Sampler/lowered_schedule.jl")
 
-include("sample.jl")
+include("Sampler/underlying_model.jl")
 
-include("plot.jl")
+#include("Sampler/sample.jl")
+
+#include("plot.jl")
 
 
 # Fix the Union{Nothing, ...} so we can write the constructor sample(initial, underlying_model, schedule)::Sample
@@ -20,7 +22,7 @@ include("plot.jl")
 
 export State
 
-export StoppingPolicy
+export StoppingTime
 
 export DeterministicStopping
 export StoppingTime

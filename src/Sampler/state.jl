@@ -1,5 +1,5 @@
 """
-    mutable State
+    State
 
 
 Fields
@@ -8,7 +8,7 @@ Fields
 julia
     coord: An N dimensional coordinate.
 
-    A state is a mutable object that contains the time and coordinates of a given realization.
+    A state is an object that contains the time and coordinates of a given realization.
 
 Examples
 ```jldoctest
@@ -28,7 +28,7 @@ julia> coord = get_coord(state)
 (1.0,)
 ```
 """
-mutable struct State{N, T <: Number, V <: Number}
+struct State{N, T <: Number, V <: Number}
   time::T
   coord::NTuple{N, V}
 end

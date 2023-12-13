@@ -1,4 +1,4 @@
-"""
+   """
     Sample
 
 Abstract type representing a realization. 
@@ -16,7 +16,7 @@ abstract type Sample{S <: State, T <: Schedule} end
 This type stores a [`State`](@ref), a [`Schedule`](@ref), an [`UnderlyingModel`](@ref) and a collection of [`Sample`](@ref). 
 Each of the later is to be interpreted as happening at a later point in time.
 """
-struct RootSample{S,T <: Schedule,N} <: Sample{S,T}
+ struct RootSample{S,T <: Schedule,N} <: Sample{S,T}
   state::S
   schedule::T
   underlying_model::UnderlyingModel
@@ -111,7 +111,7 @@ end
 """
     Layer
 
-An abstract type representing the collection of samples that happen at a shared [`StoppingPolicy`](@ref)
+An abstract type representing the collection of samples that happen at a shared [`StoppingTime`](@ref)
 """
 abstract type Layer{S <: Sample} end
 
@@ -121,7 +121,7 @@ abstract type Layer{S <: Sample} end
 Represents the first layer.
 """
 struct RootLayer{S} <: Layer{S}
-  stopping_policy::StoppingPolicy
+  stopping_time::StoppingTime
   sample_list::Vector{S}
   next::Layer{S}
 end
@@ -132,7 +132,7 @@ end
 Represents an intermediate layer.
 """
 struct NodeLayer{S} <: Layer{S}
-  stopping_policy::StoppingPolicy
+  stopping_time::StoppingTime
   sample_list::Vector{S}
   next::Layer{S}
 end
@@ -143,7 +143,7 @@ end
 Represents the last layer.
 """
 struct LeafLayer{S} <: Layer{S}
-  stopping_policy::StoppingPolicy
+  stopping_time::StoppingTime
   sample_list::Vector{S}
 end
 
@@ -168,7 +168,7 @@ A helper constructor for [`LayeredSample`]
 """
 function NodeSample(initial::State, schedule::LeafSchedule, underlying_model::UnderlyingModel, layers, dict)
   sample = LeafSample(initial, schedule, underlying_model)
-  index = dict[schedule.stopping_policy].index
+  index = dict[schedule.stopping_time].index
   push!(layers[index].sample_list, sample)
   return sample
 end
@@ -181,7 +181,7 @@ A helper constructor for [`LayeredSample`]
 function NodeSample(initial::State, schedule::Schedule, underlying_model::UnderlyingModel, layers, dict)
   children = Tuple(NodeSample(forward_to(initial, child, underlying_model), child, underlying_model, layers, dict) for child in schedule.children)
   sample = NodeSample(initial, schedule, underlying_model, children)
-  index = dict[schedule.stopping_policy].index
+  index = dict[schedule.stopping_time].index
   push!(layers[index].sample_list, sample)
   return sample
 end
