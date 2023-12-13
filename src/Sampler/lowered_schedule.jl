@@ -10,7 +10,7 @@ abstract type LoweredSchedule{T <: StoppingTime} end
 """
     TimeStamp
 
-Semantically distinct from DeterministicStopping, it is meant to indicate the fact that we need the value of a state at a given time as opposed to indicating we are stopping at that time.
+Semantically distinct from DeterministicTime, it is meant to indicate the fact that we need the value of a state at a given time as opposed to indicating we are stopping at that time.
 """
 struct TimeStamp{T}
     time::T
@@ -18,7 +18,7 @@ end
 
 
 
-function get_time_list(stopping_time::DeterministicStopping) 
+function get_time_list(stopping_time::DeterministicTime) 
   return [stopping_time]
 end
 

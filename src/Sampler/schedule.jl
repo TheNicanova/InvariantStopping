@@ -17,7 +17,7 @@ Schedule(stopping_time::T) where {T <: StoppingTime} = Schedule(stopping_time, [
 
 function Tree(lin::LinRange{<:Number, <:Integer}, branching_factor::Integer)
 
-  stopping_policy = DeterministicStopping(lin[1])
+  stopping_policy = DeterministicTime(lin[1])
 
   if length(lin) == 1
     children = []
@@ -32,7 +32,7 @@ Schedule(lin::LinRange{<:Number, <:Integer}) = Tree(lin,1)
 
 function Star(lin::LinRange{<:Number,<:Integer}, branching_factor::Integer)
 
-  stopping_policy = DeterministicStopping(lin[1])
+  stopping_policy = DeterministicTime(lin[1])
   children = [Schedule(lin[2:end]) for _ in 1:branching_factor]
 
   return Schedule(stopping_policy, children)

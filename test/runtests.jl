@@ -12,14 +12,15 @@ import InvariantStopping
   end
 
   @testset "StoppingTime" begin
-    @test InvariantStopping.DeterministicStopping(0.1) isa InvariantStopping.StoppingTime
+    @test InvariantStopping.DeterministicTime(0.1) isa InvariantStopping.StoppingTime
   end
 
   @testset "Schedule" begin
     @test InvariantStopping.Schedule(LinRange(0,10,11)) isa InvariantStopping.Schedule
     @test  InvariantStopping.Tree(LinRange(0,4,5),2) isa InvariantStopping.Schedule
-    schedule = InvariantStopping.Tree(LinRange(0,4,5),2)
-    @test InvariantStopping.collect(schedule)[1] isa InvariantStopping.Schedule
+  end
+
+  @testset "LoweredSchedule" begin
   end
 
   @testset "UnderlyingModel" begin

@@ -24,7 +24,7 @@ DeterministicStopping{Float64}(5.0)
 
 ```
 """
-struct DeterministicStopping{T <: Number} <: StoppingTime 
+struct DeterministicTime{T <: Number} <: StoppingTime 
   time::T
 end
 
