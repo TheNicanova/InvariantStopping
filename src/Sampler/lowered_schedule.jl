@@ -17,7 +17,6 @@ struct TimeStamp{T}
 end
 
 
-
 function get_time_list(stopping_time::DeterministicTime) 
   return [stopping_time]
 end
@@ -45,7 +44,7 @@ end
 struct LoweredRootSchedule{T} <: LoweredSchedule{T}
   stopping_time::T
   time_list::Vector{Union{DeterministicTime{T}, StoppingOpportunity{T}, TimeStamp{T}}}
-  children
+  children::Vector{<:LoweredSchedule}
 end
 
 
@@ -57,8 +56,7 @@ end
 struct LoweredNodeSchedule{T} <: LoweredSchedule{T}
   stopping_time::T
   time_list::Vector{Union{DeterministicTime{T}, StoppingOpportunity{T}, TimeStamp{T}}}
-  children
-  parent
+  children::Vector{<:LoweredSchedule}
 end
 
 """
@@ -69,50 +67,39 @@ end
 struct LoweredLeafSchedule{T} <: LoweredSchedule{T} 
   stopping_time::T
   time_list::Vector{Union{DeterministicTime{T}, StoppingOpportunity{T}, TimeStamp{T}}}
-  parent
 end
 
-
-
-function time_line_builder(schedule::Schedule)
-  time
-  schedule.time_line = 
-  schedule_collection = collect(schedule)
-  stopping_collection = collect()
-end
 
 
 function lower_schedule(schedule::Schedule)
   if length(schedule.children) == 0 # root is a leaf_layer
     error("The root node appears to have no children.")
   end
-    time_list = get_time_list(schedule.stopping_time) # time list inside the contained stopping time
-    last = time_list[end].time
-    children = [lower_schedule_builder(child, schedule) for child in schedule.children]
-    tmp_list = union([child.time_list for child in children]...)
-    tmp_list = filter(x -> x isa TimeStamp && x.time < last, tmp_list)
+    node_schedule = lower_schedule_helper(schedule, -Inf)
 
-    time_list = union(tmp_list, time_list)
-    time_list = sort!(time_list, by = x -> x.time)
-
-    return LoweredRootSchedule(schedule.stopping_time, time_list, children)
+    return LoweredRootSchedule(node_schedule.stopping_time, node_schedule.time_list, node_schedule.children)
 end
 
-function lower_schedule_builder(schedule::Schedule, parent)
+function lower_schedule_helper(schedule::Schedule, parent_earliest_stopped_time)
 
   if length(schedule.children) == 0 # Leaf
     time_list = get_time_list(schedule.stopping_time)
-    return LoweredLeafSchedule(schedule.stopping_time, time_list, parent)
+    return LoweredLeafSchedule(schedule.stopping_time, time_list)
   else
     time_list = get_time_list(schedule.stopping_time) # time list inside the contained stopping time
-    last = time_list[end].time
-    children = [lower_schedule_builder(child, schedule) for child in schedule.children]
-    tmp_list = union([child.time_list for child in children]...)
-    tmp_list = filter(x -> x isa TimeStamp && x.time < last, tmp_list)
+
+    index_earliest = findfirst(x -> !(x isa TimeStamp), time_list) # the first non-timestamp object
+
+    earliest_stopped_time = time_list[index_earliest].time
+    latest_stopped_time = time_list[end].time
+
+    children = [lower_schedule_helper(child, earliest_stopped_time) for child in schedule.children]
+    tmp_list = union([child.time_list for child in children]...) # pulling all the time like objects from descendants
+    tmp_list = filter(x -> x isa TimeStamp && x.time > parent_earliest_stopped_time && x.time <= latest_stopped_time, tmp_list) # keeping only this node's relevant timestamps.
 
     time_list = union(tmp_list, time_list)
     time_list = sort!(time_list, by = x -> x.time)
 
-    return LoweredNodeSchedule(schedule.stopping_time, time_list, children, parent)
+    return LoweredNodeSchedule(schedule.stopping_time, time_list, children)
   end
 end
