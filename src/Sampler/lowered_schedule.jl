@@ -4,46 +4,48 @@ import Base.collect
 """
     LoweredSchedule
 """
-abstract type LoweredSchedule{T <: StoppingTime} end
+abstract type LoweredSchedule{S <: StoppingTime} end
 
 
-"""
-    TimeStamp
 
-Semantically distinct from DeterministicTime, it is meant to indicate the fact that we need the value of a state at a given time as opposed to indicating we are stopping at that time.
-"""
-struct TimeStamp{T}
-    time::T
-end
-
-
-function get_time_list(stopping_time::DeterministicTime) 
-  return [stopping_time]
+function get_time_list(deterministic_time::DeterministicTime) 
+  return [deterministic_time.time]
 end
 
 function get_time_list(stopping_opportunity::StoppingOpportunity)
-  list = [TimeStamp(time) for time in stopping_opportunity.time_list] # List timestamps
-  list = union{list, [stopping_opportunity]} # append the stopping opportunity and unique the result
-  list = !sort(list, by = x -> x.time) # sort in place
-  return list
+  return stopping_opportunity.time_list
 end
 
 function get_time_list(stopping_time::WaitingTime)
   list_of_list = [get_time_list(stopping_opportunity) for stopping_opportunity in stopping_time.stopping_opportunity_list]
-  list = union(list_of_list...)
-  list = !sort(list, by = x -> x.time)
+  list = union(list_of_list...) # the union will remove the duplicates if any
+  list = !sort(list)
   return list
+end
+
+function get_earliest_stopping_opportunity(deterministic_time.DeterministicTime)
+  return deterministic_time.time
+end
+
+function get_earliest_stopping_opportunity(stopping_opportunity::StoppingOpportunity)
+  return stopping_opportunity.time_list[end]
+end
+
+function get_earliest_stopping_opportunity(stopping_time::WaitingTime)
+  first_stopping_opportunity = stopping_time.stopping_opportunity_list[1]
+  return get_earliest_stopping_opportunity(first_stopping_opportunity)
 end
 
 
 """
     RootSchedule <: Schedule
 
-    Stores a collection of [`Schedule`](@ref) chidlren, doesn't have a parent.
+    Stores a collection of [`Schedule`](@ref) chidlren, doesn't have a parent. 
+    Each lowered schedule object is parametrized by the type of stopping time it contains.
 """
-struct LoweredRootSchedule{T} <: LoweredSchedule{T}
-  stopping_time::T
-  time_list::Vector{Union{DeterministicTime{T}, StoppingOpportunity{T}, TimeStamp{T}}}
+struct LoweredRootSchedule{S} <: LoweredSchedule{S}
+  stopping_time::S
+  time_list::Vector{<:Union{DeterministicTime, StoppingOpportunity, TimeStamp}}
   children::Vector{<:LoweredSchedule}
 end
 
@@ -53,11 +55,11 @@ end
 
     Stores a collection of [`Schedule`](@ref) chidlren and a [`Schedule`](@ref) parent.
 """
-struct LoweredNodeSchedule{T} <: LoweredSchedule{T}
-  stopping_time::T
-  time_list::Vector{Union{DeterministicTime{T}, StoppingOpportunity{T}, TimeStamp{T}}}
+struct LoweredNodeSchedule{S} <: LoweredSchedule{S}
+  stopping_time::S
+  time_list::Vector{<:Union{DeterministicTime, StoppingOpportunity, TimeStamp}}
   children::Vector{<:LoweredSchedule}
-end
+end 
 
 """
     LeafSchedule <: Schedule
@@ -66,40 +68,45 @@ end
 """
 struct LoweredLeafSchedule{T} <: LoweredSchedule{T} 
   stopping_time::T
-  time_list::Vector{Union{DeterministicTime{T}, StoppingOpportunity{T}, TimeStamp{T}}}
+  time_list::Vector{<:Union{DeterministicTime, StoppingOpportunity, TimeStamp}}
 end
-
 
 
 function lower_schedule(schedule::Schedule)
   if length(schedule.children) == 0 # root is a leaf_layer
     error("The root node appears to have no children.")
   end
-    node_schedule = lower_schedule_helper(schedule, -Inf)
+    node_schedule, time_list = lower_schedule_helper(schedule, -Inf) # Setting the "earliest parent" to -Inf
 
     return LoweredRootSchedule(node_schedule.stopping_time, node_schedule.time_list, node_schedule.children)
 end
 
-function lower_schedule_helper(schedule::Schedule, parent_earliest_stopped_time)
+"""
+Each LoweredSchedule object contains the sampling events (timestamps, etc.) 
+from: the earliest stopped time of the parent schedule 
+to: the last stopped time of the schedule.
+"""
+
+"""
+Lower schedule helper returns a LoweredSchedule object paired with a full time list.
+"""
+function lower_schedule_helper(schedule::Schedule, parent_earliest_stopping_opportunity)
+
+  time_list = get_time_list(schedule.stopping_time) # time list inside the contained stopping time
 
   if length(schedule.children) == 0 # Leaf
-    time_list = get_time_list(schedule.stopping_time)
-    return LoweredLeafSchedule(schedule.stopping_time, time_list)
+    return LoweredLeafSchedule(schedule.stopping_time, time_list) # A leaf schedule is in charge of its time_list as there is no one else left.
   else
-    time_list = get_time_list(schedule.stopping_time) # time list inside the contained stopping time
+  
+  pairs_list = [lower_schedule_helper(child, self_earliest_stopped_time) for child in schedule.children] 
+  children = [pair[1] for pair in pairs_list]
+  children_time_list = [pair[2] for pair in pairs_list]
 
-    index_earliest = findfirst(x -> !(x isa TimeStamp), time_list) # the first non-timestamp object
+  full_time_list = union(children_time_list..., time_list)
 
-    earliest_stopped_time = time_list[index_earliest].time
-    latest_stopped_time = time_list[end].time
+  # Each LoweredSchedule object contains the times from the earliest stopping opportunity of the parent schedule to the last stopping opportunity of this schedule.
+  truncated_time_list = sort!(filter(x -> get_earliest_stopping_opportunity(schedule.stopping_time) < x.time  <= self_time_list[end], full_time_list))
 
-    children = [lower_schedule_helper(child, earliest_stopped_time) for child in schedule.children]
-    tmp_list = union([child.time_list for child in children]...) # pulling all the time like objects from descendants
-    tmp_list = filter(x -> x isa TimeStamp && x.time > parent_earliest_stopped_time && x.time <= latest_stopped_time, tmp_list) # keeping only this node's relevant timestamps.
-
-    time_list = union(tmp_list, time_list)
-    time_list = sort!(time_list, by = x -> x.time)
-
-    return LoweredNodeSchedule(schedule.stopping_time, time_list, children)
+  return LoweredNodeSchedule(schedule.stopping_time, truncated_time_list, children), full_time_list
   end
 end

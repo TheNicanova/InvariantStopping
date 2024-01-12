@@ -17,10 +17,12 @@ import InvariantStopping
 
   @testset "Schedule" begin
     @test InvariantStopping.Schedule(LinRange(0,10,11)) isa InvariantStopping.Schedule
-    @test  InvariantStopping.Tree(LinRange(0,4,5),2) isa InvariantStopping.Schedule
+    @test InvariantStopping.Tree(LinRange(0,4,5),2) isa InvariantStopping.Schedule
   end
 
   @testset "LoweredSchedule" begin
+    schedule = InvariantStopping.Schedule(LinRange(0,10,11))
+    @test InvariantStopping.lower_schedule(schedule) isa InvariantStopping.LoweredRootSchedule
   end
 
   @testset "UnderlyingModel" begin

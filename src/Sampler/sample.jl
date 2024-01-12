@@ -57,8 +57,9 @@ end
 
 function sample_helper(schedule::LoweredLeafSchedule, parent)
   index = findfirst
+end
 
 function sample(schedule::LoweredRootSchedule)
-   
+   return 0
 end
 

@@ -34,6 +34,11 @@ export RootSchedule
 export Star
 export Tree
 
+export lower_schedule
+export LoweredLeafSchedule
+export LoweredNodeSchedule
+export LoweredRootSchedule
+
 export UnderlyingModel
 export GeometricBrownianMotion
 
@@ -83,3 +88,32 @@ end
 
 
 #function price(sample::Sample, pricing_model::PricingModel, option::Option) end
+
+# Returns the trajectory from root to sample at the highest level.
+function trajectory(sample) end
+
+# Returns the trajectory from root to sample at the lowest level.
+function trace(sample) end
+ 
+function children(sample) end
+
+function parent(sample) end
+
+function get_time(sample) end
+
+function get_stopping_time(sample) end
+
+function get_schedule(sample) end
+
+function get_underlying_model(sample) end
+
+function get_coord(sample) end
+
+function find(time, sample) end
+
+# Find all the nodes with given time in sample. Returns a vector of samples.
+function find(time_list::Vector, sample) end
+
+function get_coord(sample) end
+
+

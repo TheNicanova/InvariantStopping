@@ -4,7 +4,7 @@
 Abstract type representing a stopping time. 
 There are (2) types of stopping time:
 
-- [`DeterministicStopping`](@ref)
+- [`DeterministicTime`](@ref)
 - [`WaitingTime`](@ref)
 
 """
@@ -12,21 +12,7 @@ abstract type StoppingTime end
 
 
 
-"""
-    DeterministicStopping <: StoppingTime
 
-Represents stopping at a specific concrete time, unconditionally.
-
-Examples
-```jldoctest
-julia> deterministic_stopping = DeterministicStopping(5.0)
-DeterministicStopping{Float64}(5.0)
-
-```
-"""
-struct DeterministicTime{T <: Number} <: StoppingTime 
-  time::T
-end
 
 
 
@@ -35,11 +21,12 @@ end
 
 Stopping at a time if the given condition evaluates to true. The timestamp_list indicates the timestamps required by the condition.
 """
-struct StoppingOpportunity{T}
-    time::T
+struct StoppingOpportunity{T <: Number}
     condition
     time_list::Vector{T}
 end
+
+
 
 
 """
@@ -51,4 +38,21 @@ Represents stopping at the first [`StoppingOpportunity`](@ref) evaluating to tru
 """
 struct WaitingTime{T} <: StoppingTime
     stopping_opportunity_list::Vector{StoppingOpportunity{T}}
+end
+
+
+"""
+    DeterministicTime <: StoppingTime
+
+Represents stopping at a specific concrete time, unconditionally.
+
+Examples
+```jldoctest
+julia> deterministic_stopping = DeterministicTime(5.0)
+DeterministicTime{Float64}(5.0)
+
+```
+"""
+struct DeterministicTime{T <: Number} <: StoppingTime
+  time::T
 end
