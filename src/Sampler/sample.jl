@@ -1,15 +1,18 @@
 # A schedule object that is meant to serve the sampler.
 
+# LoweredSchedule is meant to service the sampler
+
+
 struct LoweredSchedule{T}
   stopping_time::StoppingTime{T}
   timeline::Vector{T}
   children::Vector{LoweredSchedule{T}}
-  timeline_index_of_stopping_opportunity::Vector{Integer}
+  timeline_index_of_stopping_opportunity::Vector{<:Integer}
 end
 
 
 function lower(schedule::Schedule)
-    return lower_schedule_helper(schedule, -Inf)[1] # Setting the "earliest parent" to -Inf, and returning an only object
+    return lower_helper(schedule, -Inf)[1] # Setting the "earliest parent" to -Inf, and returning an only object
 end
 
 """
@@ -21,30 +24,48 @@ to: the last stopped time of the schedule.
 """
 Lower schedule helper returns a LoweredSchedule object paired with a full list of timestamps.
 """
-function lower_helper(schedule::Schedule, parent_earliest_stopping_opportunity)
+function lower_helper(schedule::Schedule{StoppingTime{T}}, parent_earliest_stopping_opportunity) where {T}
 
-  local_timestamp_list = timestamp(schedule.stopping_time) # timestamps inside the contained stopping time
+  stopping_time_timestamp_list = timestamp(schedule.stopping_time) # timestamps inside the current stopping time
 
-  if length(schedule.children) == 0 # Leaf
-    stopping_opportunity_time_list = [x.timestamp_list[end] for x in schedule.stopping_time.stopping_opportunity_list] # Recall that each stopping opportunity is associated to the last timestamp it contains.
-    timeline_index_of_stopping_opportunity = findall(x -> x ∈ stopping_opportunity_time_list, timeline)
-    return LoweredSchedule(schedule.stopping_time, local_timestamp_list, [], timeline_index_of_stopping_opportunity) # A leaf schedule is in charge of its time_list as there is no one else left.
+  endtimestamp_list = [x.timestamp_list[end] for x in schedule.stopping_time.stopping_opportunity_list] # Recall that each stopping opportunity is associated to the last timestamp it contains.
+
+  if isempty(schedule.children) # Leaf
+    timeline_index_of_stopping_opportunity = findall(timestamp -> timestamp ∈ endtimestamp_list, stopping_time_timestamp_list)
+    return (LoweredSchedule(schedule.stopping_time, stopping_time_timestamp_list, LoweredSchedule{T}[], timeline_index_of_stopping_opportunity), stopping_time_timestamp_list) # A leaf schedule is in charge of its time_list as there is no one else left.
   else
   
-  pairs_list = [lower_helper(child, self_earliest_stopped_time) for child in schedule.children] 
+  # Sending to children this stopping time's earliest stopping opportunity time
+  pairs_list = [lower_helper(child, endtimestamp_list[1]) for child in schedule.children] 
+
+  # collecting 
   children = [pair[1] for pair in pairs_list]
   children_timestamp_list = [pair[2] for pair in pairs_list]
 
-  full_time_list = union(children_timestamp_list..., local_timestamp_list)
+  full_timestamp_list = union(children_timestamp_list..., stopping_time_timestamp_list)
+  
 
   # Each LoweredSchedule object contains the times from the earliest stopping opportunity of the parent schedule to the last stopping opportunity of this schedule.
-  truncated_time_list = sort!(filter(x -> parent_earliest_stopping_opportunity <= x.time  <= local_timestamp_list[end], full_time_list)) # [parent_earliest_stopping_opportunity, se]
+  truncated_timestamp_list = sort!(filter(time -> parent_earliest_stopping_opportunity <= time  <= endtimestamp_list[end], full_timestamp_list)) # [parent_earliest_stopping_opportunity, se]
   
-  stopping_opportunity_time_list = [stopping_opportunity.timestamp_list[end] for stopping_opportunity in schedule.stopping_time.stopping_opportunity_list]
-  index_of_stopping_opportunity = findall(x -> x ∈ stopping_opportunity_time_list, truncated_time_list)
-  return LoweredSchedule(schedule.stopping_time, truncated_time_list, children, timeline_index_of_stopping_opportunity), full_time_list
+  # timeline_index_of_stopping_opportunity will become the target timelines
+  timeline_index_of_stopping_opportunity = findall(x -> x ∈ endtimestamp_list, truncated_timestamp_list) # we use the truncated timelist
+  return (LoweredSchedule(schedule.stopping_time, truncated_timestamp_list, children, timeline_index_of_stopping_opportunity), full_timestamp_list)
   end
 end
+
+##### Sampler
+
+"""
+    LoweredSample
+
+This type stores the basic unit of sampling events.
+"""
+struct LoweredSample{S <: State}
+  state::S
+  parent::Union{Nothing, LoweredSample{S}}
+end
+
 
 
 """
@@ -64,15 +85,6 @@ mutable struct Sample{S <: State, T <: Number}
 end
 
 
-"""
-    LoweredSample
-
-This type stores the basic unit of sampling events.
-"""
-struct LoweredSample{S <: State}
-  state::S
-  parent::Union{Nothing, LoweredSample{S}}
-end
 
 
 
@@ -149,36 +161,6 @@ function sample_helper(parent::Sample, lowered_schedule::LoweredSchedule, underl
   end
   # if we haven't stopped, we return nothing
   return nothing 
-end
-
-
-
-
-function sample_helper(parent::Sample, lowered_schedule::LoweredSchedule, underlying_model)
-
-current_index = findfirst(x->x==parent.state.time, lowered_schedule.timeline) 
-
-  for stopping_opportunity in lowered_schedule.stopping_time.stopping_opportunity_list
-
-    if stopping_opportunity.time_list[end] < current_time # Iterate until we find the next stopping opportunity
-      continue
-    end
-
-    # link lowered samples all the way to the last time stamp of stopping time
-    lowered_sample, stopping_opportunity = forward(parent, lowered_schedule, underlying_model)
-    find(stopping_opportunity.time_list, sample)
-
-    # Branching out
-    if stopping_opportunity.predicate(state_list)
-      sample = Sample(lowered_sample.state, lowered_schedule.stopping_time, underlying_model, [], parent, lowered_sample)
-      if isempty(lower_schedule.children)
-        return sample
-      else
-        sample.children = [sample_helper(sample, i, underlying_model) for i in lowered_schedule.children]
-        return sample
-    end
-  end
-  return nothing # no predicate was satisfied
 end
 
 function find(timestamp_list, lowered_sample::LoweredSample)

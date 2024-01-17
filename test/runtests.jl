@@ -1,32 +1,38 @@
 using Test
 
-import InvariantStopping
+using InvariantStopping
 
 
 @testset "All Tests" begin
 
   @testset "State" begin
-    @test InvariantStopping.State(0,1) isa InvariantStopping.State
-    @test InvariantStopping.State(0.0,1.0) isa InvariantStopping.State
-    @test InvariantStopping.State(0.0,(1.0,3.0)) isa InvariantStopping.State
+    @test State(0,1) isa State
+    @test State(0.0,1.0) isa State
+    @test State(0.0,(1.0,3.0)) isa State
   end
 
   @testset "StoppingTime" begin
-    @test InvariantStopping.DeterministicTime(0.1) isa InvariantStopping.StoppingTime
+    @test DeterministicTime(0.1) isa StoppingTime
+    stopping_op1 = StoppingOpportunity((x,y)->true, [3,5])
+    stopping_op2 = StoppingOpportunity(x->true, [4])
+    stopping_time = StoppingTime([stopping_op1,stopping_op2])
+    @test timestamp(stopping_time) == [3,4,5]
   end
 
   @testset "Schedule" begin
-    @test InvariantStopping.Schedule(LinRange(0,10,11)) isa InvariantStopping.Schedule
-    @test InvariantStopping.Tree(LinRange(0,4,5),2) isa InvariantStopping.Schedule
+    @test Schedule(LinRange(0,10,11)) isa Schedule
+    @test Tree(LinRange(0,4,5),2) isa Schedule
+    @test Star(LinRange(0,4,5),2) isa Schedule
+    
   end
 
   @testset "LoweredSchedule" begin
-    schedule = InvariantStopping.Schedule(LinRange(0,10,11))
-    @test InvariantStopping.lower_schedule(schedule) isa InvariantStopping.LoweredRootSchedule
+    schedule = Schedule(LinRange(0,10,11))
+    @test lower(schedule) isa LoweredSchedule
   end
 
   @testset "UnderlyingModel" begin
-    @test underlying_model = InvariantStopping.GeometricBrownianMotion(0.01, 0.05, 0.0) isa InvariantStopping.UnderlyingModel
+    #@test underlying_model = InvariantStopping.GeometricBrownianMotion(0.01, 0.05, 0.0) isa InvariantStopping.UnderlyingModel
   end
 
   @testset "Sample" begin

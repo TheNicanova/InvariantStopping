@@ -8,8 +8,6 @@ include("Sampler/stopping_time.jl")
 
 include("Sampler/schedule.jl")
 
-include("Sampler/lowered_schedule.jl")
-
 include("Sampler/underlying_model.jl")
 
 include("Sampler/sample.jl")
@@ -22,10 +20,13 @@ include("Sampler/sample.jl")
 
 export State
 
-export StoppingTime
+export UnderlyingModel
+export GeometricBrownianMotion
 
-export DeterministicStopping
+export StoppingOpportunity
 export StoppingTime
+export DeterministicTime
+export timestamp
 
 export Schedule
 export LeafSchedule
@@ -34,14 +35,12 @@ export RootSchedule
 export Star
 export Tree
 
-export lower_schedule
-export LoweredLeafSchedule
-export LoweredNodeSchedule
-export LoweredRootSchedule
 
-export UnderlyingModel
-export GeometricBrownianMotion
+export Schedule
 
+
+export lower
+export LoweredSchedule
 export Sample
 export LeafSample
 export NodeSample
@@ -73,7 +72,7 @@ function forward(initial::State{N,T,V}, forward::T, underlying_model::GeometricB
   dt = forward - get_time(initial)
   if dt < 0
     throw(ArgumentError("Initial time is later than forward time."))
-  else if dt == 0
+  elseif dt == 0
     return initial
   end
 
