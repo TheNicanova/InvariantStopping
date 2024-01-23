@@ -6,9 +6,8 @@ using InvariantStopping
 @testset "All Tests" begin
 
   @testset "State" begin
-    @test State(0,1) isa State
-    @test State(0.0,1.0) isa State
-    @test State(0.0,(1.0,3.0)) isa State
+    @test State(1.0) isa State
+    @test State((1.0,3.0)) isa State
   end
 
   @testset "StoppingTime" begin
@@ -32,15 +31,14 @@ using InvariantStopping
   end
 
   @testset "UnderlyingModel" begin
-    #@test underlying_model = InvariantStopping.GeometricBrownianMotion(0.01, 0.05, 0.0) isa InvariantStopping.UnderlyingModel
+    @test underlying_model = GeometricBrownianMotion(0.01, 0.05, 0.0) isa InvariantStopping.UnderlyingModel
   end
 
   @testset "Sample" begin
-    #state = InvariantStopping.State(0.0,1.0)
-    #schedule = InvariantStopping.Tree(LinRange(0,4,5),2)
-    #underlying_model = InvariantStopping.GeometricBrownianMotion(0.01, 0.05, 0.0)
-    
-    #@test InvariantStopping.Sample(state, schedule, underlying_model) isa InvariantStopping.Sample 
+    state = State(0.0)
+    schedule = Tree(LinRange(0,1,2),2)
+    underlying_model = GeometricBrownianMotion(0.01, 0.05, 0.0)
+    @test sample(state, schedule, underlying_model) isa Sample 
   end
 
 end

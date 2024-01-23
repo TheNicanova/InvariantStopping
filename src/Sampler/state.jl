@@ -10,15 +10,9 @@ julia
 
     A state is an object that contains the time and coordinates of a given realization.
 """
-struct State{N, T <: Number, V <: Number}
-  time::T
+struct State{N, V <: Number}
   coord::NTuple{N, V}
 end
 
-
-State(time::Number, coord::Number) = State(time,(coord,))
-
-get_time(state::State) = state.time
-  
-get_coord(state::State) = state.coord
+State(coord::Number) = State((coord,))
 

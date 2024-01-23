@@ -13,7 +13,6 @@ end
 ####### Methods ######
 
 
-
 # Constructor
 function DeterministicTime(t)
     always_true_condition = x -> true

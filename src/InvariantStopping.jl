@@ -42,9 +42,7 @@ export Schedule
 export lower
 export LoweredSchedule
 export Sample
-export LeafSample
-export NodeSample
-export RootSample
+export sample
 
 export plot
 
@@ -68,25 +66,17 @@ julia> forward_state = forward_to(initial_state, forward_time, underlying_model)
 
 ```
 """
-function forward(initial::State{N,T,V}, forward::T, underlying_model::GeometricBrownianMotion) where {N, T <: Number, V <: Number}
-  dt = forward - get_time(initial)
-  if dt < 0
+function forward(state::State{N,V}, now::T, later::T, underlying_model::GeometricBrownianMotion) where {N, T <: Number, V <: Number}
+  if now > later
     throw(ArgumentError("Initial time is later than forward time."))
-  elseif dt == 0
-    return initial
+  elseif now == later
+    return state
+  else
+    scaling_factor = exp((underlying_model.rate - underlying_model.dividend - underlying_model.sigma^2.0 / 2.0) * dt + underlying_model.sigma * sqrt(dt) * rand(Normal(0,1)))
+    updated_coord = state.coord .* scaling_factor
+    return State(updated_coord)
   end
-
-  scaling_factor = exp((underlying_model.rate - underlying_model.dividend - underlying_model.sigma^2.0 / 2.0) * dt + underlying_model.sigma * sqrt(dt) * rand(Normal(0,1)))
-  updated_coord = get_coord(initial) .* scaling_factor
-  return State(forward, updated_coord)
 end
-
-function forward(initial::State, forward_schedule::Schedule, underlying_model::UnderlyingModel)
-  return forward(initial, get_time(forward_schedule), underlying_model)
-end
-
-end
-
 
 #function price(sample::Sample, pricing_model::PricingModel, option::Option) end
 
@@ -121,6 +111,4 @@ function get_children_time(sample) end
 
 function get_children_coord(sample) end
 
-
-
-
+end

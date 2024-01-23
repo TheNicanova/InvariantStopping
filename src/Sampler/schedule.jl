@@ -4,15 +4,15 @@ include("stopping_time.jl")
 """
 Meant to be as easy as possible for the user to define.
 """
-struct Schedule{S <: StoppingTime}
-  stopping_time::S
+struct Schedule{T <: Number}
+  stopping_time::StoppingTime{T}
   children
 end
 
 
 # constructors
 
-Schedule(stopping_time::S) where {S <: StoppingTime} = Schedule(stopping_time, [])
+Schedule(stopping_time::StoppingTime) = Schedule(stopping_time, [])
 
 
 function Tree(lin::LinRange{<:Number, <:Integer}, branching_factor::Integer)
