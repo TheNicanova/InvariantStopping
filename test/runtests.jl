@@ -22,7 +22,6 @@ using InvariantStopping
     @test Schedule(LinRange(0,10,11)) isa Schedule
     @test Tree(LinRange(0,4,5),2) isa Schedule
     @test Star(LinRange(0,4,5),2) isa Schedule
-    
   end
 
   @testset "LoweredSchedule" begin

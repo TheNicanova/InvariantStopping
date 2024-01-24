@@ -8,6 +8,8 @@ include("Sampler/stopping_time.jl")
 
 include("Sampler/schedule.jl")
 
+include("Sampler/lowered_schedule.jl")
+
 include("Sampler/underlying_model.jl")
 
 include("Sampler/sample.jl")
