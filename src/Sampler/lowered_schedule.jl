@@ -54,35 +54,16 @@ function lower_helper(schedule::Schedule{T}, parent_endtimestamp_list) where {T}
   end
 end
 
-function get_index(timestamp, lowered_schedule::LoweredSchedule)
-  return findfirst(x -> x == parent.time, lowered_schedule.timeline) # TODO: Improve the performance of this
-end
 
-function get_decision_timestamp_list(timestamp, lowered_schedule)
-  
-end
+# LoweredSchedule Interface
 
-function get_next_target_index(timestamp, lowered_schedule)
-  return findfirst(index -> lowered_schedule.timeline_index_of_stopping_opportunity[index] >= current_timestamp)
-end
 
-function get_sampling_event_list(current_timestamp, target_timestamp, lowered_schedule)
+function get_sampling_event_list(current_timestamp, target_timestamp, lowered_schedule) # TODO: Make this more efficient.
   if current_timestamp == target_timestamp
     return []
   elseif current_timestamp < target_timestamp
-    return [timestamp for timeline in lowered_schedule.timeline if current_timestamp < timestamp <: target_timestamp]
+    return [timestamp for timestamp in lowered_schedule.timeline if current_timestamp < timestamp <= target_timestamp] 
   else
     error("timestamps out of order")
   end
-end
-
-
-function get_target(current_timestamp, lowered_schedule)
-  initial = findfirst(index -> lowered_schedule.timeline_index_of_stopping_opportunity[index] >= current_timestamp)
-  return [timeline[target_index] for target_index in lowered_schedule.timeline_index_of_stopping_opportunity[initial:end]]
-end
-
-function get_stopping_opportunity(current_time, lowered_schedule)
- index =findfirst(index -> lowered_schedule.timeline_index_of_stopping_opportunity[index] >= current_timestamp)
- return lowered_schedule.stopping_opportunity.stopping_opportunity_list[index]
 end
