@@ -12,7 +12,7 @@ end
 
 
 function lower(schedule::Schedule)
-    return lower_helper(schedule, -Inf)[1] # Setting the "earliest parent" to -Inf, and returning an only object
+    return lower_helper(schedule, [-Inf])[1] # Setting the "earliest parent" to -Inf, and returning an only object
 end
 
 """

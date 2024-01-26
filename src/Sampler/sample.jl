@@ -52,19 +52,6 @@ function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::Stopp
 end
 
 
-function forward(lowered_sample::LoweredSample{S,T}, target_timestamp, lowered_schedule::LoweredSchedule{T}, underlying_model::UnderlyingModel) where {S <: State, T <: Number}
-  
-  current_lowered_sample = lowered_sample
-  
-  sampling_timestamp_list = get_sampling_timestamp_list(current_lowered_sample.time, target_timestamp, lowered_schedule)
-
-  for sampling_timestamp in sampling_timestamp_list
-      new_state = forward(current_lowered_sample.state, current_lowered_sample.time, sampling_timestamp, underlying_model)
-      new_lowered_sample = LoweredSample(new_state, current_lowered_sample)
-      current_lowered_sample = new_lowered_sample
-  end
-  return lowered_sample
-end
 
 """
     Sample <: Sample
@@ -96,11 +83,11 @@ Depending on the answer, it either
   False : continue the loop.
 """
 
-function sample_helper(parent_lowered_sample::LoweredSample{State,T}, parent_sample::Sample{State,T}, lowered_schedule::LoweredSchedule{T}, underlying_model::UnderlyingModel) where {T}
+function sample_helper(parent_lowered_sample::LoweredSample{State,T}, parent_sample::Union{Sample{State,T},Vector{<:Sample{State,T}}}, lowered_schedule::LoweredSchedule{T}, underlying_model::UnderlyingModel) where {T}
 
   current_lowered_sample = parent_lowered_sample
 
-  current_stopping_opportunity_index =findfirst(index -> lowered_schedule.stopping_time.stopping_opportunity_list[index][end] >= current_timestamp)
+  current_stopping_opportunity_index =findfirst(index -> lowered_schedule.stopping_time.stopping_opportunity_list[index][end] >= current_timestamp, lowered_schedule.timeline)
 
   # For each timestamp where we have to make a decision
   for stopping_opportunity in lowered_schedule.stopping_time.stopping_opportunity_list[current_stopping_opportunity_index:end]
@@ -133,5 +120,5 @@ function sample(state::State, schedule::Schedule{T}, underlying_model::Underlyin
   
   lowered_sample = LoweredSample(state, lowered_schedule.timeline[1], LoweredSample{State,T}[]) # Empty set for parent.
 
-  return sample_helper(lowered_sample, nothing, lowered_schedule, underlying_model) # parent is set to nothing
+  return sample_helper(lowered_sample, Sample{State,T}[], lowered_schedule, underlying_model) # parent is set to empty
 end
