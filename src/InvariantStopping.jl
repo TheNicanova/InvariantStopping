@@ -74,6 +74,7 @@ function forward(state::State{N,V}, now::T, later::T, underlying_model::Geometri
   elseif now == later
     return state
   else
+    dt = later - now
     scaling_factor = exp((underlying_model.rate - underlying_model.dividend - underlying_model.sigma^2.0 / 2.0) * dt + underlying_model.sigma * sqrt(dt) * rand(Normal(0,1)))
     updated_coord = state.coord .* scaling_factor
     return State(updated_coord)

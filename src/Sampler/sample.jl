@@ -35,7 +35,7 @@ function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::Stopp
 
   target_timestamp = stopping_opportunity.timestamp_list[end]
 
-  sampling_timestamp_list = get_sampling_timestamp_list(lowered_sample.time, target_timestamp, lowered_schedule)
+  sampling_timestamp_list = get_sampling_event_list(lowered_sample.time, target_timestamp, lowered_schedule)
   
   current_lowered_sample = lowered_sample
 
@@ -62,8 +62,8 @@ mutable struct Sample{S <: State, T <: Number}
   stopping_time::StoppingTime{T}
   underlying_model::UnderlyingModel
   children::Vector{Sample{S,T}}
-  parent::Vector{<:Sample}
-  lowered_sample::LoweredSample{S}
+  parent::Union{Nothing, Sample{S,T}}
+  lowered_sample::LoweredSample{<:S,T}
   first_stopped::StoppingOpportunity{T}
 end
 
@@ -80,7 +80,7 @@ Depending on the answer, it either
   False : continue the loop.
 """
 
-function sample_helper(parent_lowered_sample::LoweredSample{State,T}, parent_sample, lowered_schedule::LoweredSchedule{T}, underlying_model::UnderlyingModel) where {T}
+function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}, parent_sample, lowered_schedule::LoweredSchedule{T}, underlying_model::UnderlyingModel) where {S <: State, T}
 
   current_lowered_sample = parent_lowered_sample
 

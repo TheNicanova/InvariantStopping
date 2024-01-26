@@ -11,7 +11,7 @@ end
 
 
 function lower(schedule::Schedule{T}) where {T}
-    return lower_helper(schedule, T[])[1] # Setting the set of parents to emptyset
+    return lower_helper(schedule, T[])[1] # Setting parent_endtimestamp_list to empty list
 end
 
 """
@@ -31,6 +31,7 @@ function lower_helper(schedule::Schedule{T}, parent_endtimestamp_list) where {T}
     return (LoweredSchedule(schedule.stopping_time, stopping_time_timestamp_list, LoweredSchedule{T}[]), stopping_time_timestamp_list) # A leaf schedule is in charge of its time_list as there is no one else left.
   else
   
+  endtimestamp_list = [stopping_opportunity.timestamp_list[end] for stopping_opportunity in schedule.stopping_time.stopping_opportunity_list]
   # Sending to children this stopping time's earliest stopping opportunity
   pairs_list = [lower_helper(child, endtimestamp_list) for child in schedule.children] 
 
@@ -40,8 +41,13 @@ function lower_helper(schedule::Schedule{T}, parent_endtimestamp_list) where {T}
 
   full_timestamp_list = union(parent_endtimestamp_list, stopping_time_timestamp_list,children_timestamp_list...) # if parent is empty, this is 
   
+  if isempty(parent_endtimestamp_list)
+    lower_bound = -Inf
+  else
+    lower_bound = parent_endtimestamp_list[1]
+  end
   # Each LoweredSchedule object contains the times from the earliest stopping opportunity of the parent schedule to the last stopping opportunity of this schedule.
-  truncated_timestamp_list = sort!(filter(time -> parent_endtimestamp_list[1] <= time  <= endtimestamp_list[end], full_timestamp_list)) # [parent_earliest_stopping_opportunity, se]
+  truncated_timestamp_list = sort!(filter(time -> lower_bound <= time  <= endtimestamp_list[end], full_timestamp_list)) # [parent_earliest_stopping_opportunity, se]
   
   return (LoweredSchedule(schedule.stopping_time, truncated_timestamp_list, children), full_timestamp_list)
   end
@@ -64,7 +70,7 @@ end
 function get_stopping_opportunity_index(current_timestamp::T, lowered_schedule::LoweredSchedule{T}) where {T}
   number_of_stopping_opportunity = length(lowered_schedule.stopping_time.stopping_opportunity_list)
   for index in 1:number_of_stopping_opportunity
-    if lowered_schedule.stopping_time.stopping_opportunity_list[index][end] >= current_timestamp
+    if lowered_schedule.stopping_time.stopping_opportunity_list[index].timestamp_list[end] >= current_timestamp
       return index
     end
   end
