@@ -24,6 +24,7 @@ export State
 
 export UnderlyingModel
 export GeometricBrownianMotion
+export ModuloTwo
 
 export StoppingOpportunity
 export StoppingTime
@@ -44,12 +45,15 @@ export Schedule
 export lower
 export LoweredSchedule
 export Sample
+export LoweredSample
 export sample
 
 export plot
 
 export forward_to
 
+export trajectory
+export lower_trajectory
 
 """
     forward_to(::State, ::Number, ::UnderlyingModel)
@@ -81,13 +85,46 @@ function forward(state::State{N,V}, now::T, later::T, underlying_model::Geometri
   end
 end
 
+
+
+function forward(state::State{1,V}, now::T, later::T, underlying_model::ModuloTwo) where {T <: Number,V <: Number}
+  if 0 <= (later % 2) < 1
+    return State{1,V}((0.0,))
+  else
+    return State{1,V}((1.0,))
+  end
+end
+
+
+
+
 #function price(sample::Sample, pricing_model::PricingModel, option::Option) end
 
 # Returns the trajectory from root to sample at the highest level.
-function trajectory(sample) end
+function trajectory(sample::Sample{S,T}) where {S <: State, T}
+  sample_list = Sample{S,T}[sample]
+
+  current_sample = sample
+  while !isnothing(current_sample.parent)
+    push!(sample_list, current_sample.parent)
+    current_sample = current_sample.parent
+  end
+  return reverse!(sample_list)
+end
+
+
 
 # Returns the trajectory from root to sample at the lowest level.
-function trace(sample) end
+function lower_trajectory(sample::Sample{S,T}) where {S <: State, T} 
+  lowered_sample_list = [sample.lowered_sample]
+
+  current_lowered_sample = sample.lowered_sample
+  while !isnothing(current_lowered_sample.parent)
+    push!(lowered_sample_list, current_lowered_sample.parent)
+    current_lowered_sample = current_lowered_sample.parent
+  end
+  return reverse!(lowered_sample_list)
+end
  
 function children(sample) end
 

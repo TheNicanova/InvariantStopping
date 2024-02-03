@@ -19,3 +19,5 @@ struct GeometricBrownianMotion <: UnderlyingModel
   sigma::Number
   dividend::Number
 end
+
+struct ModuloTwo <: UnderlyingModel end

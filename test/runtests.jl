@@ -35,9 +35,9 @@ using InvariantStopping
 
   @testset "Sample" begin
     state = State(0.0)
-    schedule = Tree(LinRange(0,1,2),2)
+    schedule = Tree(LinRange(0,1,5), 2)
     underlying_model = GeometricBrownianMotion(0.01, 0.05, 0.0)
     @test sample(state, schedule, underlying_model) isa Sample 
+    @test length(trajectory(sample(state, schedule, underlying_model))) == 1
   end
-
 end
