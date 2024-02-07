@@ -1,7 +1,7 @@
 # A schedule object that is meant to serve the sampler.
 
 # LoweredSchedule is meant to service the sampler
-
+include("schedule.jl")
 
 struct LoweredSchedule{T}
   stopping_time::StoppingTime{T}

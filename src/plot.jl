@@ -32,33 +32,45 @@ plot(sample)
 
 
 """
-function plot(sample::Sample)
+function plot(sample)
   p = Gadfly.plot()
   push!(p, Gadfly.Guide.title("A sample"))
   push!(p, Gadfly.Guide.xlabel("Time"), Gadfly.Guide.ylabel("Coord"))
-  plot(p, sample)
+  plot_helper(p, sample)
   return p
 end
 
-
-function plot(layered_sample::LayeredSample)
-  plot(layered_sample.sample)
+function plot(nothing::Nothing) 
+  print("Argument is nothing")
 end
+
 
 """
     plot(::Any, ::NodeSample)
 
 A helper function for recursively plotting trajectories.
 """
-function plot(p::Any, sample::Union{RootSample, NodeSample})
-  start_time = get_time(sample)
-  start_coord = get_coord(sample)[1]
+function plot_helper(p, sample)
+  start_time = sample.time
+  start_coord = sample.state.coord
   for child in sample.children
-    end_time = get_time(child)
-    end_coord = get_coord(child)[1]
-    push!(p, Gadfly.layer(x=[start_time,end_time], y=[start_coord, end_coord],Gadfly.Geom.line))
-    plot(p, child)
+    end_time = child.time
+    end_coord = child.state.coord
+    push!(p, Gadfly.layer(x=[start_time,end_time], y=[start_coord[1], end_coord[1]],Gadfly.Geom.line))
+    plot_helper(p, child)
   end
 end
 
-function plot(p, ::LeafSample) end
+function plot2D(sample)
+  p = Gadfly.plot()
+  push!(p, Gadfly.Guide.xlabel("x Coord"), Gadfly.Guide.ylabel("yCoord"))
+  leafs = leaf_list(sample)
+  for leaf in leafs
+    
+    trajectory = history(leaf)
+    x_coord = [sample.state.coord[1] for sample in trajectory]
+    y_coord = [sample.state.coord[2] for sample in trajectory]
+    push!(p, Gadfly.layer(x=x_coord, y=y_coord),Gadfly.Geom.path)
+  end
+  return p
+end

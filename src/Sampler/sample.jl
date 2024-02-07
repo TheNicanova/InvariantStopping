@@ -1,3 +1,6 @@
+include("state.jl")
+include("lowered_schedule.jl")
+include("underlying_model.jl")
 
 ##### Sampler
 
@@ -113,8 +116,7 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
       return sample
     end
   end
-
-  return nothing # if no predicate was satisfied, then we return nothing.
+  return nothing # if no predicate was satisfied, then w
 end
 
 
@@ -126,3 +128,4 @@ function sample(state::State, schedule::Schedule{T}, underlying_model::Underlyin
 
   return sample_helper(lowered_sample, nothing, lowered_schedule, underlying_model) # parent is set to nothing
 end
+

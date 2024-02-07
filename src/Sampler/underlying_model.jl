@@ -21,3 +21,5 @@ struct GeometricBrownianMotion <: UnderlyingModel
 end
 
 struct ModuloTwo <: UnderlyingModel end
+
+struct BrownianMotion <: UnderlyingModel end

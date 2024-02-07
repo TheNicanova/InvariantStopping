@@ -2,19 +2,9 @@ module InvariantStopping
 
 using Distributions
 
-include("Sampler/state.jl")
-
-include("Sampler/stopping_time.jl")
-
-include("Sampler/schedule.jl")
-
-include("Sampler/lowered_schedule.jl")
-
-include("Sampler/underlying_model.jl")
-
 include("Sampler/sample.jl")
 
-#include("plot.jl")
+include("plot.jl")
 
 
 # Fix the Union{Nothing, ...} so we can write the constructor sample(initial, underlying_model, schedule)::Sample
@@ -25,11 +15,13 @@ export State
 export UnderlyingModel
 export GeometricBrownianMotion
 export ModuloTwo
+export BrownianMotion
 
 export StoppingOpportunity
 export StoppingTime
 export DeterministicTime
 export timestamp
+export HittingTime
 
 export Schedule
 export LeafSchedule
@@ -48,12 +40,18 @@ export Sample
 export LoweredSample
 export sample
 
+
 export plot
+export plot2D
 
 export forward_to
 
-export trajectory
-export lower_trajectory
+export history
+export lower_history
+export trajectory_list
+export leaf_list
+
+
 
 """
     forward_to(::State, ::Number, ::UnderlyingModel)
@@ -85,8 +83,6 @@ function forward(state::State{N,V}, now::T, later::T, underlying_model::Geometri
   end
 end
 
-
-
 function forward(state::State{1,V}, now::T, later::T, underlying_model::ModuloTwo) where {T <: Number,V <: Number}
   if 0 <= (later % 2) < 1
     return State{1,V}((0.0,))
@@ -96,13 +92,21 @@ function forward(state::State{1,V}, now::T, later::T, underlying_model::ModuloTw
 end
 
 
-
+function forward(state::State{N,V}, now::T, later::T, underlying_model::BrownianMotion) where {T, V, N}
+  if now > later
+    throw(ArgumentError("Initial time is later than forward time."))
+  end
+  perturbation = Tuple(rand(Normal(0,1),N))
+  scaling_factor = later - now
+  new_coord = state.coord .+ (scaling_factor .* perturbation)
+  return State{N,V}(new_coord)
+end
 
 #function price(sample::Sample, pricing_model::PricingModel, option::Option) end
 
 # Returns the trajectory from root to sample at the highest level.
-function trajectory(sample::Sample{S,T}) where {S <: State, T}
-  sample_list = Sample{S,T}[sample]
+function history(sample::S) where {S}
+  sample_list = S[sample]
 
   current_sample = sample
   while !isnothing(current_sample.parent)
@@ -115,18 +119,31 @@ end
 
 
 # Returns the trajectory from root to sample at the lowest level.
-function lower_trajectory(sample::Sample{S,T}) where {S <: State, T} 
-  lowered_sample_list = [sample.lowered_sample]
+function lower_history(sample::T) where {T} 
+  return history(sample.lowered_sample)
+end
 
-  current_lowered_sample = sample.lowered_sample
-  while !isnothing(current_lowered_sample.parent)
-    push!(lowered_sample_list, current_lowered_sample.parent)
-    current_lowered_sample = current_lowered_sample.parent
+function leaf_list(sample)
+  if isempty(sample.children) || isnothing(sample.children)
+    return [sample]
+  else
+    return union([leaf_list(child) for child in sample.children]...)
   end
-  return reverse!(lowered_sample_list)
+end
+
+function trajectory_list(sample)
+  trajectory_list = []
+  list = leaf_list(sample)
+
+  for leaf in list
+    push!(trajectory_list, history(leaf))
+  end
+  return trajectory_list
 end
  
-function children(sample) end
+function children(sample) 
+
+end
 
 function parent(sample) end
 
@@ -138,17 +155,20 @@ function get_schedule(sample) end
 
 function get_underlying_model(sample) end
 
-function get_coord(sample) end
+function get_coord(sample_list)
+   return [sample.state.coord for sample in sample_list]
+end
 
 function find(time, sample) end
 
 # Find all the nodes with given time in sample. Returns a vector of samples.
 function find(time_list::Vector, sample) end
 
-function get_coord(sample) end
 
 function get_children_time(sample) end
 
 function get_children_coord(sample) end
 
 end
+
+
