@@ -1,4 +1,19 @@
 
+module Policy
+
+export StoppingTime
+export DeterministicTime
+export HittingTime
+export timestamp
+export StoppingOpportunity
+export HittingTime
+
+export ZeroFive
+export ZeroFour
+export OneFive
+export OneFour
+
+
 struct StoppingOpportunity{T <: Number}
     predicate::Function
     timestamp_list::Vector{T}
@@ -43,3 +58,27 @@ function HittingTime(predicate, timestamp_list)
     return StoppingTime([StoppingOpportunity(predicate, [timestamp]) for timestamp in timestamp_list])
 end
 
+
+#### Testing and Debugging 
+
+function ZeroFive()
+    predicate = x -> true
+    return StoppingOpportunity(predicate, [0.0,5.0])
+end
+
+function ZeroFour()
+    predicate = x -> true
+    zero = StoppingOpportunity(predicate, [0.0, 4.0])
+end
+
+function OneFive()
+    predicate = x -> true
+    return StoppingOpportunity(predicate, [1.0,5.0])
+end
+
+function OneFour()
+    predicate = x -> true
+    return StoppingOpportunity(predicate, [1.0,4.0])
+end
+
+end

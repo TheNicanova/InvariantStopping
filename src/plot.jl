@@ -1,4 +1,14 @@
+
+module Plot
+
+export plot
+export plot2D
+
 import Gadfly
+
+using ..Utils
+using ..Sampler
+
 
 """
     plot(::Sample)
@@ -64,13 +74,15 @@ end
 function plot2D(sample)
   p = Gadfly.plot()
   push!(p, Gadfly.Guide.xlabel("x Coord"), Gadfly.Guide.ylabel("yCoord"))
-  leafs = leaf_list(sample)
+  leafs = get_leaf(sample)
   for leaf in leafs
     
-    trajectory = history(leaf)
+    trajectory = get_history(leaf)
     x_coord = [sample.state.coord[1] for sample in trajectory]
     y_coord = [sample.state.coord[2] for sample in trajectory]
     push!(p, Gadfly.layer(x=x_coord, y=y_coord),Gadfly.Geom.path)
   end
   return p
+end
+
 end

@@ -1,7 +1,15 @@
-include("state.jl")
-include("lowered_schedule.jl")
-include("underlying_model.jl")
 
+module Sampler
+
+export find
+
+export Sample
+export LoweredSample
+
+using ..SimulationState
+using ..Policy
+using ..Scheduler
+using ..Transition
 ##### Sampler
 
 """
@@ -44,7 +52,7 @@ function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::Stopp
 
     # Sample and chain lowered samples up to the target, if we are at target_timestamp already, this will do nothing
     for sampling_timestamp in sampling_timestamp_list
-        new_state = forward(current_lowered_sample.state, current_lowered_sample.time, sampling_timestamp, underlying_model)
+        new_state = Transition.forward(current_lowered_sample.state, current_lowered_sample.time, sampling_timestamp, underlying_model)
         new_lowered_sample = LoweredSample(new_state, sampling_timestamp, current_lowered_sample)
         current_lowered_sample = new_lowered_sample
     end
@@ -120,7 +128,7 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
 end
 
 
-function sample(state::State, schedule::Schedule{T}, underlying_model::UnderlyingModel) where {T}
+function Sample(state::State, schedule::Schedule{T}, underlying_model::UnderlyingModel) where {T}
 
   lowered_schedule = lower(schedule)
   
@@ -129,3 +137,4 @@ function sample(state::State, schedule::Schedule{T}, underlying_model::Underlyin
   return sample_helper(lowered_sample, nothing, lowered_schedule, underlying_model) # parent is set to nothing
 end
 
+end

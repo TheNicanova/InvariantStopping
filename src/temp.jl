@@ -3,10 +3,7 @@
     Schedule
 
 An abstract type representing partial orders over [`StoppingTime`](@ref). Each schedule stores a [`StoppingTime`](@ref). 
-There are (3) types of schedules: 
-  - [`RootSchedule`](@ref) 
-  - [`NodeSchedule`](@ref)
-  - [`LeafSchedule`](@ref)
+
 """
 abstract type Schedule{T <: StoppingTime} end
 

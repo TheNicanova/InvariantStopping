@@ -1,3 +1,8 @@
+
+module SimulationState
+
+export State
+
 """
     State
 
@@ -16,3 +21,4 @@ end
 
 State(coord::Number) = State((coord,))
 
+end
