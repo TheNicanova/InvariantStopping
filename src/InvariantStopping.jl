@@ -15,6 +15,7 @@ export HittingTime
 
 
 export Schedule
+export lower
 export LoweredSchedule
 
 
@@ -27,6 +28,7 @@ export LoweredSample
 
 export plot
 export plot2D
+export lower_plot2D
 
 include("Sampler/simulation_state.jl")
 include("Sampler/policy.jl")
@@ -44,6 +46,4 @@ using .Transition
 using .Utils
 using .Plot
 
-
-# Returns the trajectory from root to sample at the highest level.
 end

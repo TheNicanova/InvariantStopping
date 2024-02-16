@@ -64,7 +64,7 @@ end
 
 
 """
-    Sample <: Sample
+    Sample
 
 This type stores a [`State`](@ref), a [`Schedule`](@ref), an [`UnderlyingModel`](@ref) and a collection of [`Sample`](@ref). 
 Each of the later is to be interpreted as happening at a later point in time.
@@ -97,7 +97,7 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
 
   current_lowered_sample = parent_lowered_sample
 
-  current_stopping_opportunity_index = get_stopping_opportunity_index(current_lowered_sample.time, lowered_schedule)
+  current_stopping_opportunity_index = get_current_stopping_opportunity_index(current_lowered_sample.time, lowered_schedule)
 
 
   # For each timestamp where we have to make a decision
@@ -128,6 +128,9 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
 end
 
 
+"""
+    Sample
+"""
 function Sample(state::State, schedule::Schedule{T}, underlying_model::UnderlyingModel) where {T}
 
   lowered_schedule = lower(schedule)

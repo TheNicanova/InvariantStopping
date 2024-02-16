@@ -3,12 +3,12 @@
 # Underlying Model
 
 
-## State Space
+## State
 ```@docs
 State
 ```
 
-## Stopping Times
+## StoppingTime
 
 ```@docs
 StoppingPolicy
@@ -22,109 +22,34 @@ DeterministicStopping
 StoppingTime
 ```
 
-## Ordering Stopping Times
+## Schedule
 
 ```@docs
 Schedule
 ```
 
+### LoweredSchedule
 ```@docs
-RootSchedule
+LoweredSchedule
 ```
 
-```@docs
-NodeSchedule
-```
+## UnderlyingModel
 
 ```@docs
-LeafSchedule
-```
-
-## Forwarding States
-
-```@docs
-UnderlyingModel
+BrownianMotion
 ```
 
 ```@docs
 GeometricBrownianMotion
 ```
 
-## Sampling
+## Sample
 
 ```@docs
 Sample
 ```
-```@docs
-RootSample
-```
+### LoweredSample
 
 ```@docs
-NodeSample
+ LoweredSample
 ```
-
-```@docs
-LeafSample
-```
-
-# Pricing Model
-
-## Cache
-
-The Cache type specifies the data that is stored and used by a given PricingModel object. Each pricing algorithm must return the Cache objects it uses.
-```@docs
-Cache
-```
-
-The SampleCache type specifies the format of the data that the PricingModel will store at each Sample object.
-```@docs
-SampleCache
-```
-
-
-The SampleCache type specifies the format of the data that the PricingModel will store at each Layer object.
-```@docs
-LayerCache
-```
-
-## PricingModel
-
-```@docs
-PricingModel
-```
-
-```@docs
-LayeredPricingModel
-```
-
-### Basic
-
-```@docs
-Basic
-```
-
-```@docs
-update(::Sample, ::Basic)
-```
-
-```@docs
-get_cache(::Sample, ::Basic)
-```
-
-
-
-### LongStaff
-
-### SampleCache
-
-
-
-### LayerCache
-
-## WrappedSampled
-
-## Layer
-
-## Data
-
-

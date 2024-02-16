@@ -8,11 +8,13 @@ export lower
 export LoweredSchedule
 
 export get_sampling_event_list
-export get_stopping_opportunity_index
+export get_current_stopping_opportunity_index
 
 using ..Policy
 
 """
+  Schedule
+  
 Meant to be as easy as possible for the user to define.
 """
 struct Schedule{T <: Number}
@@ -58,6 +60,9 @@ end
 # TODO: transform the user defined, for instance predicate = x -> true, into a normal form.
 
 
+"""
+    LoweredSchedule
+"""
 struct LoweredSchedule{T}
   stopping_time::StoppingTime{T}
   timeline::Vector{T}
@@ -81,9 +86,9 @@ Lower schedule helper returns a LoweredSchedule object paired with a full list o
 function lower_helper(schedule::Schedule{T}, parent_endtimestamp_list) where {T}
 
   stopping_time_timestamp_list = timestamp(schedule.stopping_time) # timestamps inside the current stopping time
-  
   if isempty(schedule.children) # Leaf
-    return (LoweredSchedule(schedule.stopping_time, stopping_time_timestamp_list, LoweredSchedule{T}[]), stopping_time_timestamp_list) # A leaf schedule is in charge of its time_list as there is no one else left.
+    full_timestamp_list = sort!(union(parent_endtimestamp_list, stopping_time_timestamp_list))
+    return (LoweredSchedule(schedule.stopping_time, full_timestamp_list, LoweredSchedule{T}[]), full_timestamp_list) # A leaf schedule is in charge of its time_list as there is no one else left.
   else
   
   endtimestamp_list = [stopping_opportunity.timestamp_list[end] for stopping_opportunity in schedule.stopping_time.stopping_opportunity_list]
@@ -111,18 +116,17 @@ end
 
 # LoweredSchedule Interface
 
-
-function get_sampling_event_list(current_timestamp::T, target_timestamp::T, lowered_schedule::LoweredSchedule{T}) where {T}# TODO: Make this more efficient.
-  if current_timestamp == target_timestamp
-    return T[]
+function get_sampling_event_list(current_timestamp::T, target_timestamp::T, lowered_schedule::LoweredSchedule{T}) where {T} # TODO: Make this more efficient.
+  if current_timestamp > target_timestamp
+    error("timestamps out of order")
   elseif current_timestamp < target_timestamp
     return [timestamp for timestamp in lowered_schedule.timeline if current_timestamp < timestamp <= target_timestamp] 
-  else
-    error("timestamps out of order")
+  elseif current_timestamp == target_timestamp
+    return T[]
   end
 end
 
-function get_stopping_opportunity_index(current_timestamp::T, lowered_schedule::LoweredSchedule{T}) where {T}
+function get_current_stopping_opportunity_index(current_timestamp::T, lowered_schedule::LoweredSchedule{T}) where {T}
   number_of_stopping_opportunity = length(lowered_schedule.stopping_time.stopping_opportunity_list)
   for index in 1:number_of_stopping_opportunity
     if lowered_schedule.stopping_time.stopping_opportunity_list[index].timestamp_list[end] >= current_timestamp

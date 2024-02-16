@@ -37,6 +37,9 @@ end
 
 struct ModuloTwo <: UnderlyingModel end
 
+"""
+    BrownianMotion
+"""
 struct BrownianMotion <: UnderlyingModel end
 
 """
