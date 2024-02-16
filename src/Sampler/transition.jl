@@ -13,11 +13,6 @@ using Distributions
 
 
 
-"""
-    UnderlyingModel
-
-An abstract type representing the transition function of a markov process.
-"""
 abstract type UnderlyingModel end
 
 """
@@ -42,23 +37,8 @@ struct ModuloTwo <: UnderlyingModel end
 """
 struct BrownianMotion <: UnderlyingModel end
 
-"""
-    forward_to(::State, ::Number, ::UnderlyingModel)
 
-Forwards a (`State`)(@ref) in time using the provided ()`UnderlyingModel`](@ref). Returns a (`State`)(@ref).
 
-Examples
-```julia
-julia> initial_state = State(0.0,1.0)
-
-julia> forward_time = 10.0
-
-julia> underlying_model = GeometricBrownianMotion()
-
-julia> forward_state = forward_to(initial_state, forward_time, underlying_model)
-
-```
-"""
 function forward(state::State{N,V}, now::T, later::T, underlying_model::GeometricBrownianMotion) where {N, T <: Number, V <: Number}
   if now > later
     throw(ArgumentError("Initial time is later than forward time."))

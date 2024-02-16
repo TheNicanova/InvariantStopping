@@ -83,6 +83,8 @@ to: the last stopped time of the schedule.
 """
 Lower schedule helper returns a LoweredSchedule object paired with a full list of timestamps.
 """
+
+
 function lower_helper(schedule::Schedule{T}, parent_endtimestamp_list) where {T}
 
   stopping_time_timestamp_list = timestamp(schedule.stopping_time) # timestamps inside the current stopping time

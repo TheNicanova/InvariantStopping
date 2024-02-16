@@ -56,11 +56,6 @@ function plot(nothing::Nothing)
 end
 
 
-"""
-    plot(::Any, ::NodeSample)
-
-A helper function for recursively plotting trajectories.
-"""
 function plot_helper(p, sample)
   start_time = sample.time
   start_coord = sample.state.coord

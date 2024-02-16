@@ -26,6 +26,10 @@ export ModuloTwo
 export Sample
 export LoweredSample
 
+export get_leaf
+export get_history
+
+
 export plot
 export plot2D
 export lower_plot2D

@@ -66,7 +66,6 @@ end
 """
     Sample
 
-This type stores a [`State`](@ref), a [`Schedule`](@ref), an [`UnderlyingModel`](@ref) and a collection of [`Sample`](@ref). 
 Each of the later is to be interpreted as happening at a later point in time.
 """
 mutable struct Sample{S <: State, T <: Number}

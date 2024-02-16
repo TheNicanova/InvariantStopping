@@ -11,15 +11,20 @@ State
 ## StoppingTime
 
 ```@docs
-StoppingPolicy
-```
-
-```@docs
-DeterministicStopping
-```
-
-```@docs
 StoppingTime
+```
+
+```@docs
+StoppingOpportunity
+```
+
+```@docs
+HittingTime
+```
+
+
+```@docs
+DeterministicTime
 ```
 
 ## Schedule

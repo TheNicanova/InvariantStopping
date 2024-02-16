@@ -5,9 +5,9 @@ makedocs(
   modules=[InvariantStopping], 
   format=Documenter.HTML(),
   pages=[
-    "Usage" => "usage.md",
+    "Usage" => "index.md",
     "Overview" => "overview.md",
-    "Plotting" => "plot.md",
+    "Types" => "type.md",
     "Appendix: Docstring Guidelines" => "docstring_guidelines.md"
   ]
 )

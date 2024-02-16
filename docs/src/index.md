@@ -61,7 +61,7 @@ TODO: Attach imageo of plot(sample)
 
 
 ```@docs
-get_trajectory(::Sample)
+get_history(::Sample)
 ```
 
 ```@docs
@@ -73,4 +73,7 @@ get_leaf(::Sample)
 ```@docs
 plot(::Sample)
 ```
+
+
+## User Defined Process
 

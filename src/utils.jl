@@ -61,9 +61,6 @@ function get_lower_trajectory(sample)
 end
 
 
-"""
-    get_trajectory
-"""
 function get_trajectory(sample)
   trajectory_list = []
   list = get_leaf(sample)
