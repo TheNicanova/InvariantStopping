@@ -32,6 +32,8 @@ julia> underlying_model = BrownianMotion();
 julia> sample = Sample(state, schedule, underlying_model)
 ```
 
+
+
 TODO: Attach image of plot(sample)
 
 
