@@ -22,13 +22,12 @@ struct Schedule{T <: Number}
   children
 end
 
-
 # constructors
 
 Schedule(stopping_time::StoppingTime) = Schedule(stopping_time, [])
 
 
-function Tree(lin::LinRange{<:Number, <:Integer}, branching_factor::Integer)
+function Tree(lin, branching_factor::Integer)
 
   stopping_policy = DeterministicTime(lin[1])
 
@@ -41,7 +40,7 @@ function Tree(lin::LinRange{<:Number, <:Integer}, branching_factor::Integer)
   return Schedule(stopping_policy, children)
 end
 
-Schedule(lin::LinRange{<:Number, <:Integer}) = Tree(lin,1)
+Schedule(lin) = Tree(lin,1)
 
 function Star(lin::LinRange{<:Number,<:Integer}, branching_factor::Integer)
 

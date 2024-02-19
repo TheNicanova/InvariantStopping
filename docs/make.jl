@@ -8,6 +8,8 @@ makedocs(
     "Usage" => "index.md",
     "Overview" => "overview.md",
     "Types" => "type.md",
+    "Methods" => "method.md",
+    "Dev" => "dev.md",
     "Appendix: Docstring Guidelines" => "docstring_guidelines.md"
   ]
 )

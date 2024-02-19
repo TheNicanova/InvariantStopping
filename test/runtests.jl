@@ -70,7 +70,7 @@ using InvariantStopping
     schedule = InvariantStopping.Tree(LinRange(0,1,5), 2)
     underlying_model = BrownianMotion()
     sample = Sample(state, schedule, underlying_model)
-    plot = InvariantStopping.plot2D(sample)
+    plot = InvariantStopping.plot(sample,[1,2])
   end
 
   function ZeroFive(truth_value)

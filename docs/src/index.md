@@ -1,43 +1,111 @@
 # Usage
 
-
-
 ## Installation
 
-InvariantStopping can be installed using the Julia package manager.
-From the Julia REPL, type `]` to enter the Pkg REPL mode and run
+InvariantStopping can be installed by running
+```julia
+using Pkg; Pkg.add("InvariantStopping")
+```
 
-```
-pkg> add InvariantStopping
-```
-or with `using Pkg; Pkg.add("InvariantStopping")`.
 
 ## Usage example
 
-First, we load InvariantStopping (if we haven't already done so):
 ```julia
-julia> using InvariantStopping
+using InvariantStopping
 ```
 
-
-In order to generate samples, we must first specify an initial state, a schedule and an underlying model.
+In order to generate samples, we must specify 3 things:
+* An initial state 
+* A schedule
+* A process
 
 ```julia
-julia> initial_state = State(0.0,1.0) # (x coord, y coord)
+state = State(0.0) # x coord
 
-julia> schedule = Schedule(LinRange(0.0, 10, 20)) 
+schedule = Schedule([0.0,1.0,2.0,3.0])
 
-julia> underlying_model = BrownianMotion(); 
+process = BrownianMotion(); 
 
-julia> sample = Sample(state, schedule, underlying_model)
+sample = Sample(state, schedule, process)
 ```
 
+In the above we are sampling a realization of a 1D Brownian motion at times 0.0, 1.0, 2.0 and 3.0. We can visualize the sample using
+
+```julia
+plot(sample)
+```
+![1D sample plot](assets/single_sample_1D.svg)
+
+We can increase the dimension of our state space. Consider for instance
+```julia
+state_4D = State((0.0,0.0,0.0,0.0))
+sample_4D = Sample(state_4D, schedule, process) 
+```
+which samples a realization of a 4D Brownian motion. As opposed to plotting coordinate value against time, we can plot any pair of coordinates against each other. For instance
+```julia
+plot(sample_4D,[1,4])
+```
+produces a two dimensional plot where first coordinates are mapped onto the x axis and the fourth coordinates are mapped onto the y axis.
+
+![2D sample plot](assets/single_sample_2D.svg)
+
+We can specify schedule with increasing complexity. 
+
+```julia
+tree_schedule = InvariantStopping.Tree([0.0,1.0,2.0,3.0],3);
+
+tree_sample = Sample(state, tree_schedule, process);
+plot(tree_sample)
+```
+![1D ternary tree plot](assets/ternary_tree_plot.svg)
+
+And in 4D
+```julia
+ternary_sample_4D = Sample(state_4D, tree_schedule, process);
+plot(ternary_sample_4D,[1,4]) # Plotting coordinate 1 against coordinate 4
+```
+
+![2D ternary tree plot](assets/ternary_tree_plot_2D.svg)
+
+Schedule accepts LinRange as well. For instance
+```julia
+star_schedule = InvariantStopping(Star(LinRange(0,5,10),40));
+star_sample = Sample(state, star_schedule, process);
+plot(star_sample)
+```
+
+![1D star plot](assets/star_plot_1D.svg)
+
+## Custom Schedule
+
+Let's first take a look at the following
+
+```julia
+schedule = InvariantStopping.Tree([0,1,2],3)
+sample = Sample(state, schedule, process)
+```
+This generates a tree of samples.
+
+![Ternary Tree](assets/custom_schedule_page1.svg)
+
+Note that the above tree can be interpreted as a tree of stopping times with deterministic stopping times.
+
+![Ternary Tree](assets/custom_schedule_page2.svg)
+
+These deterministic stopping times could be replaced by arbitary stopping times.
+
+![Ternary Tree](assets/custom_schedule_page3.svg)
+
+One can see that schedules can be made very general.
+
+![Ternary Tree](assets/custom_schedule_page4.svg)
+
+To craft our own schedule, we must first define a stopping time and the stopping opportunities it contained.
 
 
-TODO: Attach image of plot(sample)
+### Stopping Time and Stopping Opportunity
 
-
-Here the schedule correponds to a simple path generated at deterministic times. We can specify more sophisticated schedule. For instance
+ For instance
 
 ```julia
 function predicate_1(x,y) 
@@ -48,34 +116,16 @@ function predicate_2(x,y)
   return x + 1.0 > 0.5
 end
 
-julia> stopping_time_1 = HittingTime(predicate_1, LinRange(0.0,10,20))
-julia> stopping_time_2 = HittingTime(predicate_2, LinRange(0.0,10,20))
+stopping_time_1 = HittingTime(predicate_1, LinRange(0.0,10,20))
+stopping_time_2 = HittingTime(predicate_2, LinRange(0.0,10,20))
 
-julia> schedule = Schedule(stopping_time_1, [Schedule(stopping_time_2)for _ in 1:10])
+schedule = Schedule(stopping_time_1, [Schedule(stopping_time_2)for _ in 1:10])
 
-julia> sample = Sample(state,schedule, underlying_model)
+sample = Sample(state,schedule, underlying_model)
 ```
 
-TODO: Attach imageo of plot(sample)
+TODO: Attach image of plot(sample)
+TODO: Make predicate more stable, as of now it can only take a list of states, as opposed to the coordinates. Makes it hard to define predicates.
 
-
-## API
-
-
-```@docs
-get_history(::Sample)
-```
-
-```@docs
-get_leaf(::Sample)
-```
-
-### Plotting 
-
-```@docs
-plot(::Sample)
-```
-
-
-## User Defined Process
+## Custom Process
 

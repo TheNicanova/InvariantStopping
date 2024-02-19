@@ -45,7 +45,7 @@ plot(sample)
 """
 function plot(sample::Union{Sample,LoweredSample})
   p = Gadfly.plot()
-  push!(p, Gadfly.Guide.title("1D plot of sample's first coordinate"))
+  push!(p, Gadfly.Guide.title("plot of first coordinate against time"))
   push!(p, Gadfly.Guide.xlabel("Time"), Gadfly.Guide.ylabel("Coord"))
   plot_helper(p, sample)
   return p
@@ -67,15 +67,15 @@ function plot_helper(p, sample)
   end
 end
 
-function plot2D(sample)
+function plot(sample,index_list)
   p = Gadfly.plot()
-  push!(p, Gadfly.Guide.title("2D plot of sample's first 2 coordinates"))
+  push!(p, Gadfly.Guide.title("2D plot of selected coordinates"))
   push!(p, Gadfly.Guide.xlabel("x Coord"), Gadfly.Guide.ylabel("y Coord"))
   leafs = get_leaf(sample)
   for leaf in leafs
     trajectory = get_history(leaf)
-    x_coord = [sample.state.coord[1] for sample in trajectory]
-    y_coord = [sample.state.coord[2] for sample in trajectory]
+    x_coord = [sample.state.coord[index_list[1]] for sample in trajectory]
+    y_coord = [sample.state.coord[index_list[2]] for sample in trajectory]
     push!(p, Gadfly.layer(x=x_coord, y=y_coord),Gadfly.Geom.path)
   end
   return p
