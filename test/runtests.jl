@@ -74,47 +74,47 @@ using InvariantStopping
   end
 
   function ZeroFive(truth_value)
-    predicate = x -> truth_value
+    predicate = (t,_) -> truth_value
     return StoppingOpportunity(predicate, [0.0,5.0])
 end
 
 function ZeroFour(truth_value)
-    predicate = x -> truth_value
+    predicate = (t,_) -> truth_value
     zero = StoppingOpportunity(predicate, [0.0, 4.0])
 end
 
 function OneFive(truth_value)
-    predicate = x -> truth_value
+    predicate = (t,_) -> truth_value
     return StoppingOpportunity(predicate, [1.0,5.0])
 end
 
 function OneFour(truth_value)
-    predicate = x -> truth_value
+    predicate = (t,_) -> truth_value
     return StoppingOpportunity(predicate, [1.0,4.0])
 end
 
 function Zero(truth_value)
-  predicate = x -> truth_value
+  predicate = (t,_) -> truth_value
   return StoppingOpportunity(predicate, [0.0])
 end
 
 function One(truth_value)
-  predicate = x -> truth_value
+  predicate = (t,_) -> truth_value
   return StoppingOpportunity(predicate, [1.0])
 end
 
 function Two(truth_value)
-  predicate = x -> truth_value
+  predicate = (t,_) -> truth_value
   return StoppingOpportunity(predicate, [2.0])
 end
 
 function Three(truth_value)
-  predicate = x -> truth_value
+  predicate = (t,_) -> truth_value
   return StoppingOpportunity(predicate, [3.0])
 end
 
 function Four(truth_value)
-  predicate = x -> truth_value
+  predicate = (t,_) -> truth_value
   return StoppingOpportunity(predicate, [4.0])
 end
 

@@ -35,9 +35,9 @@ end
 """
     DeterministicTime
 """
-function DeterministicTime(t)
-    always_true_condition = x -> true
-    stopping_opportunity = StoppingOpportunity(always_true_condition, [t])
+function DeterministicTime(time)
+    always_true = (t,_) -> true
+    stopping_opportunity = StoppingOpportunity(always_true, [time])
     return StoppingTime([stopping_opportunity])
 end
 

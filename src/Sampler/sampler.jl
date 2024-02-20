@@ -81,6 +81,9 @@ end
 
 
 
+
+
+
 """
 sample_helper is recursive.
 - Locates its current timestamp (the parent`s time) in the lowered_schedule's timeline.
@@ -110,7 +113,7 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
     
     state_list = find(stopping_opportunity.timestamp_list, current_lowered_sample, parent_sample, lowered_schedule)
 
-    if stopping_opportunity.predicate(state_list)
+    if stopping_opportunity.predicate(current_lowered_sample.time, state_list)
 
      # The condition is met, hence we generate a new sample object
       sample = Sample(current_lowered_sample.state, current_lowered_sample.time, lowered_schedule.stopping_time, underlying_model, Sample{State,T}[], parent_sample, current_lowered_sample, stopping_opportunity) 
