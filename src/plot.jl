@@ -55,7 +55,6 @@ function plot(nothing::Nothing)
   print("Argument is nothing")
 end
 
-
 function plot_helper(p, sample)
   start_time = sample.time
   start_coord = sample.state.coord
@@ -66,6 +65,8 @@ function plot_helper(p, sample)
     plot_helper(p, child)
   end
 end
+
+
 
 function plot(sample,index_list)
   p = Gadfly.plot()
@@ -81,20 +82,20 @@ function plot(sample,index_list)
   return p
 end
 
+function plot_lower(sample)
+  p = plot(sample)
 
-
-function lower_plot2D(sample::Sample)
-  p = Gadfly.plot()
-  push!(p, Gadfly.Guide.title("2D plot of lowered sample's first 2 coordinates"))
-  push!(p, Gadfly.Guide.xlabel("x Coord"), Gadfly.Guide.ylabel("y Coord"))
-  lower_leafs = get_leaf(sample)
-  for leaf in lower_leafs
-    lower_trajectory = get_lower_history(leaf)
-    x_coord = [sample.state.coord[1] for sample in lower_trajectory]
-    y_coord = [sample.state.coord[2] for sample in lower_trajectory]
+  lower_leafs = get_lower_leaf(sample)
+  for lower_leaf in lower_leafs
+    trajectory = get_history(leaf)
+    x_coord = [sample.state.coord[index_list[1]] for sample in trajectory]
+    y_coord = [sample.state.coord[index_list[2]] for sample in trajectory]
     push!(p, Gadfly.layer(x=x_coord, y=y_coord),Gadfly.Geom.path)
   end
   return p
 end
 
+
 end
+
+

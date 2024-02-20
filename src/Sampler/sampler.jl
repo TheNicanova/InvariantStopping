@@ -20,6 +20,7 @@ This type stores the basic unit of sampling events.
 struct LoweredSample{S <: State, T <: Number}
   state::S
   time::T
+  children::Vector{LoweredSample{S,T}}
   parent::Union{Nothing,LoweredSample{S,T}}
 end
 
@@ -53,7 +54,8 @@ function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::Stopp
     # Sample and chain lowered samples up to the target, if we are at target_timestamp already, this will do nothing
     for sampling_timestamp in sampling_timestamp_list
         new_state = Transition.forward(current_lowered_sample.state, current_lowered_sample.time, sampling_timestamp, underlying_model)
-        new_lowered_sample = LoweredSample(new_state, sampling_timestamp, current_lowered_sample)
+        new_lowered_sample = LoweredSample(new_state, sampling_timestamp, LoweredSample{S,T}[], current_lowered_sample)
+        push!(current_lowered_sample.children, new_lowered_sample)
         current_lowered_sample = new_lowered_sample
     end
     return current_lowered_sample
@@ -107,7 +109,7 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
 
     # Sample and chain lowered samples up to the target
     current_lowered_sample = forward(current_lowered_sample, stopping_opportunity, lowered_schedule, underlying_model)
-    
+  
 
     # After forwarding we have the condition that current_lowered_sample contains all the information needed to answer the stopping opportunity's predicate
     
@@ -126,7 +128,7 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
       return sample
     end
   end
-  return nothing # if no predicate was satisfied, then w
+  return Sample{S,T}[] # if no predicate was satisfied, then w
 end
 
 
@@ -137,7 +139,7 @@ function Sample(state::State, schedule::Schedule{T}, underlying_model::Underlyin
 
   lowered_schedule = lower(schedule)
   
-  lowered_sample = LoweredSample(state, lowered_schedule.timeline[1], nothing) # Nothing for parent.
+  lowered_sample = LoweredSample(state, lowered_schedule.timeline[1], LoweredSample{State,T}[], nothing) # Nothing for parent.
 
   return sample_helper(lowered_sample, nothing, lowered_schedule, underlying_model) # parent is set to nothing
 end

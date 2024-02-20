@@ -8,10 +8,6 @@ export timestamp
 export StoppingOpportunity
 export HittingTime
 
-export ZeroFive
-export ZeroFour
-export OneFive
-export OneFour
 
 """
     StoppingOpportunity
