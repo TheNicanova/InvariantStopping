@@ -38,17 +38,13 @@ end
     get_leaf
 """
 function get_leaf(sample)
-  if isempty(sample.children) || isnothing(sample.children)
+  if isempty(sample.children)
     return [sample]
   else
-    return union([get_leaf(child) for child in sample.children]...)
+    return union([],[get_leaf(child) for child in sample.children if !isnothing(child)]...)
   end
 end
 
-function get_lower_leaf(sample)
-  leaf_list = get_leaf(sample)
-  return [leaf.lowered_sample for leaf in leaf_list]
-end
 
 
 function get_lower_trajectory(sample)

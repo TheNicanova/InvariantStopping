@@ -31,8 +31,7 @@ export get_history
 
 
 export plot
-export plot2D
-export lower_plot2D
+export plot_lower
 
 include("Sampler/simulation_state.jl")
 include("Sampler/policy.jl")

@@ -75,14 +75,11 @@ mutable struct Sample{S <: State, T <: Number}
   time::T
   stopping_time::StoppingTime{T}
   underlying_model::UnderlyingModel
-  children::Vector{Sample{S,T}}
+  children::Vector{<:Union{Nothing,Sample{S,T}}}
   parent::Union{Nothing, Sample{S,T}}
   lowered_sample::LoweredSample{<:S,T}
   first_stopped::StoppingOpportunity{T}
 end
-
-
-
 
 
 
@@ -128,7 +125,7 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
       return sample
     end
   end
-  return Sample{S,T}[] # if no predicate was satisfied, then w
+  return nothing # if no predicate was satisfied, then we 
 end
 
 
