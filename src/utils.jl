@@ -2,19 +2,20 @@ module Utils
   
 export get_history
 export get_lower_history
-export get_trajectory
-export get_lower_trajectory
-export get_leaf
-export get_lower_leaf
+export get_all_trajectory
 
+export get_all_leaf
+
+export get_lower_history
+export get_lower_trajectory
 
 using ..Sampler
 
-#function price(sample::Sample, pricing_model::PricingModel, option::Option) end
 
-# Returns the trajectory from root to sample at the highest level.
 """
-    get_history
+    get_history(::Sample)
+  
+Returns the list of samples starting from the root to the provided sample.
 """
 function get_history(sample::S) where {S}
   sample_list = S[sample]
@@ -27,41 +28,45 @@ function get_history(sample::S) where {S}
   return reverse!(sample_list)
 end
 
+"""
+    get_all_leaf(::Sample)
+
+Returns a list of all leafs from the provided sample onward.
+"""
+
+function get_all_leaf(sample)
+  if isempty(sample.children) || isnothing(sample.children)
+    return [sample]
+  else
+    return union([],[get_all_leaf(child) for child in sample.children if !isnothing(child)]...)
+  end
+end
+
+"""
+    get_all_trajectory(::Sample)
+Returns a list of all trajectories from the provided sampled onward. A trajectory is a list of states from the provided sample onward to a leaf.
+"""
+function get_all_trajectory(sample)
+  trajectory_list = []
+  list = get_all_leaf(sample)
+  for leaf in list
+    push!(trajectory_list, get_history(leaf))
+  end
+  return trajectory_list
+end
+
+
 
 # Returns the trajectory from root to sample at the lowest level.
 function get_lower_history(sample::T) where {T} 
   return get_history(sample.lowered_sample)
 end
 
-
-"""
-    get_leaf
-"""
-function get_leaf(sample)
-  if isempty(sample.children)
-    return [sample]
-  else
-    return union([],[get_leaf(child) for child in sample.children if !isnothing(child)]...)
-  end
-end
-
-
-
-function get_lower_trajectory(sample)
+function get_all_lower_trajectory(sample)
   trajectory_list = []
-  list = get_leaf(sample)
+  list = get_all_leaf(sample)
   for leaf in list
     push!(trajectory_list, get_lower_history(leaf))
-  end
-  return trajectory_list
-end
-
-
-function get_trajectory(sample)
-  trajectory_list = []
-  list = get_leaf(sample)
-  for leaf in list
-    push!(trajectory_list, get_history(leaf))
   end
   return trajectory_list
 end

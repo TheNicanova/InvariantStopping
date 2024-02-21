@@ -1,44 +1,38 @@
 
 
-# Underlying Model
+# Policy
 
-
-## State
-```@docs
-State
-```
-
-## StoppingTime
-
-```@docs
-StoppingTime
-```
 
 ```@docs
 StoppingOpportunity
 ```
 
 ```@docs
-HittingTime
+StoppingTime
 ```
-
 
 ```@docs
 DeterministicTime
+
+```@docs
+HittingTime
 ```
 
-## Schedule
+# Scheduler
 
 ```@docs
 Schedule
 ```
 
-### LoweredSchedule
 ```@docs
 LoweredSchedule
 ```
 
-## UnderlyingModel
+# Process
+
+ ```@docs
+State
+```
 
 ```@docs
 BrownianMotion
@@ -48,12 +42,12 @@ BrownianMotion
 GeometricBrownianMotion
 ```
 
-## Sample
+# Sampler
+
 
 ```@docs
 Sample
 ```
-### LoweredSample
 
 ```@docs
  LoweredSample

@@ -1,51 +1,42 @@
 module InvariantStopping
 
-
-# Fix the Union{Nothing, ...} so we can write the constructor sample(initial, underlying_model, schedule)::Sample
-# initial time needs to agree with schedule time. Perhaps have a rootsample, rootschedule.
-
 export State
-
 
 export StoppingOpportunity
 export StoppingTime
 export DeterministicTime
-export timestamp
+
 export HittingTime
 
-
 export Schedule
-export lower
 export LoweredSchedule
-
 
 export BrownianMotion
 export GeometricBrownianMotion
-export ModuloTwo
 
 export Sample
 export LoweredSample
 
-export get_leaf
+export get_sample
+export get_all_timestamp
+export get_all_leaf
+export get_all_trajectory
 export get_history
-
 
 export plot
 export plot_lower
 
-include("Sampler/simulation_state.jl")
+include("Sampler/process.jl")
 include("Sampler/policy.jl")
 include("Sampler/scheduler.jl")
-include("Sampler/transition.jl")
 include("Sampler/sampler.jl")
 include("utils.jl")
 include("plot.jl")
 
-using .SimulationState
 using .Policy
 using .Scheduler
 using .Sampler
-using .Transition
+using .Process
 using .Utils
 using .Plot
 

@@ -81,7 +81,7 @@ function plot(sample,index_list)
   p = Gadfly.plot()
   push!(p, Gadfly.Guide.title("2D plot of selected coordinates"))
   push!(p, Gadfly.Guide.xlabel("x Coord"), Gadfly.Guide.ylabel("y Coord"))
-  leafs = get_leaf(sample)
+  leafs = get_all_leaf(sample)
   for leaf in leafs
     trajectory = get_history(leaf)
     x_coord = [sample.state.coord[index_list[1]] for sample in trajectory]
@@ -95,7 +95,7 @@ function plot_lower(sample,index_list)
   p = Gadfly.plot()
   push!(p, Gadfly.Guide.title("2D plot of selected coordinates"))
   push!(p, Gadfly.Guide.xlabel("x Coord"), Gadfly.Guide.ylabel("y Coord"))
-  leafs = get_leaf(sample)
+  leafs = get_all_leaf(sample)
   for leaf in leafs
     trajectory = get_lower_history(leaf)
     x_coord = [sample.state.coord[index_list[1]] for sample in trajectory]

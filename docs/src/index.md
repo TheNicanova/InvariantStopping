@@ -1,5 +1,7 @@
 # Usage
 
+* Explore how optimal stopping problems transform under random-time coordinate transforms. *
+
 ## Installation
 
 InvariantStopping can be installed by running

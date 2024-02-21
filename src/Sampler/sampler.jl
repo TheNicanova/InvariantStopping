@@ -3,19 +3,20 @@ module Sampler
 
 export find
 
+
 export Sample
 export LoweredSample
+export get_sample
 
-using ..SimulationState
 using ..Policy
 using ..Scheduler
-using ..Transition
-##### Sampler
+using ..Process
+
 
 """
     LoweredSample
 
-This type stores the basic unit of sampling events.
+The unit of sampling. 
 """
 struct LoweredSample{S <: State, T <: Number}
   state::S
@@ -25,7 +26,8 @@ struct LoweredSample{S <: State, T <: Number}
 end
 
 
-# Lowered 
+
+# TODO: Make find more efficient
 
 function find(timestamp_list, lowered_sample::LoweredSample{S,T}, parent, lowered_schedule) where {S <: State, T} # TODO: Make this more efficient, for instance search using the parent chain
   state_list = S[]
@@ -43,7 +45,7 @@ function find(timestamp_list, lowered_sample::LoweredSample{S,T}, parent, lowere
 end
 
 
-function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::StoppingOpportunity{T}, lowered_schedule::LoweredSchedule{T}, underlying_model::UnderlyingModel) where {S <: State,T}
+function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::StoppingOpportunity{T}, lowered_schedule::LoweredSchedule{T}, process::UnderlyingModel) where {S <: State,T}
 
   target_timestamp = stopping_opportunity.timestamp_list[end]
 
@@ -53,7 +55,7 @@ function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::Stopp
 
     # Sample and chain lowered samples up to the target, if we are at target_timestamp already, this will do nothing
     for sampling_timestamp in sampling_timestamp_list
-        new_state = Transition.forward(current_lowered_sample.state, current_lowered_sample.time, sampling_timestamp, underlying_model)
+        new_state = Process.forward(current_lowered_sample.state, current_lowered_sample.time, sampling_timestamp, process)
         new_lowered_sample = LoweredSample(new_state, sampling_timestamp, LoweredSample{S,T}[], current_lowered_sample)
         push!(current_lowered_sample.children, new_lowered_sample)
         current_lowered_sample = new_lowered_sample
@@ -62,19 +64,17 @@ function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::Stopp
 end
 
 
-
-
-
 """
     Sample
 
-Each of the later is to be interpreted as happening at a later point in time.
+A state sampled according to a given stopping time. 
+It is set to 'nothing' if the stopping time is never realized.
 """
 mutable struct Sample{S <: State, T <: Number}
   state::S
   time::T
   stopping_time::StoppingTime{T}
-  underlying_model::UnderlyingModel
+  process::UnderlyingModel
   children::Vector{<:Union{Nothing,Sample{S,T}}}
   parent::Union{Nothing, Sample{S,T}}
   lowered_sample::LoweredSample{<:S,T}
@@ -94,7 +94,7 @@ Depending on the answer, it either
   False : continue the loop.
 """
 
-function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}, parent_sample, lowered_schedule::LoweredSchedule{T}, underlying_model::UnderlyingModel) where {S <: State, T}
+function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}, parent_sample, lowered_schedule::LoweredSchedule{T}, process::UnderlyingModel) where {S <: State, T}
 
   current_lowered_sample = parent_lowered_sample
 
@@ -105,7 +105,7 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
   for stopping_opportunity in lowered_schedule.stopping_time.stopping_opportunity_list[current_stopping_opportunity_index:end]
 
     # Sample and chain lowered samples up to the target
-    current_lowered_sample = forward(current_lowered_sample, stopping_opportunity, lowered_schedule, underlying_model)
+    current_lowered_sample = forward(current_lowered_sample, stopping_opportunity, lowered_schedule, process)
   
 
     # After forwarding we have the condition that current_lowered_sample contains all the information needed to answer the stopping opportunity's predicate
@@ -115,13 +115,13 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
     if stopping_opportunity.predicate(current_lowered_sample.time, state_list)
 
      # The condition is met, hence we generate a new sample object
-      sample = Sample(current_lowered_sample.state, current_lowered_sample.time, lowered_schedule.stopping_time, underlying_model, Sample{State,T}[], parent_sample, current_lowered_sample, stopping_opportunity) 
+      sample = Sample(current_lowered_sample.state, current_lowered_sample.time, lowered_schedule.stopping_time, process, Sample{State,T}[], parent_sample, current_lowered_sample, stopping_opportunity) 
      
       if isempty(lowered_schedule.children) # Leaf
         return sample
       end
       # Recursively get the children
-      sample.children = [sample_helper(current_lowered_sample, sample, child_schedule, underlying_model) for child_schedule in lowered_schedule.children]
+      sample.children = [sample_helper(current_lowered_sample, sample, child_schedule, process) for child_schedule in lowered_schedule.children]
       return sample
     end
   end
@@ -130,15 +130,17 @@ end
 
 
 """
-    Sample
+    get_sample
+
+Populates the provided schedule by simulating the underlying process from the provided state onward.
 """
-function Sample(state::State, schedule::Schedule{T}, underlying_model::UnderlyingModel) where {T}
+function get_sample(state::State, schedule::Schedule{T}, process::UnderlyingModel) where {T}
 
   lowered_schedule = lower(schedule)
   
   lowered_sample = LoweredSample(state, lowered_schedule.timeline[1], LoweredSample{State,T}[], nothing) # Nothing for parent.
 
-  return sample_helper(lowered_sample, nothing, lowered_schedule, underlying_model) # parent is set to nothing
+  return sample_helper(lowered_sample, nothing, lowered_schedule, process) # parent is set to nothing
 end
 
 end
