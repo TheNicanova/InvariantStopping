@@ -1,17 +1,7 @@
-
-module Plot
-
-export plot
-export plot_lower
-
-import Gadfly
-
-using ..Utils
-using ..Sampler
-
+using Gadfly
 
 """
-    plot(::Sample)
+    plot
 
 1D : Plot a sample with the x-axis representing time and the y-axis representing the first coordinate.
 
@@ -40,7 +30,6 @@ plot(sample)
 ```
 ![Sample plot](assets/star.svg)
 
-
 """
 function plot(sample::Union{Sample,LoweredSample})
   p = Gadfly.plot()
@@ -68,6 +57,9 @@ function plot_helper(p, sample)
   end
 end
 
+"""
+  plot_lower
+"""
 function plot_lower(sample)
   p = Gadfly.plot()
   push!(p, Gadfly.Guide.title("plot of first coordinate against time"))
@@ -91,6 +83,8 @@ function plot(sample,index_list)
   return p
 end
 
+
+
 function plot_lower(sample,index_list)
   p = Gadfly.plot()
   push!(p, Gadfly.Guide.title("2D plot of selected coordinates"))
@@ -105,10 +99,4 @@ function plot_lower(sample,index_list)
   return p
   
 end
-
-
-
-
-end
-
 

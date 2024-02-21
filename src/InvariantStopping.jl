@@ -5,7 +5,6 @@ export State
 export StoppingOpportunity
 export StoppingTime
 export DeterministicTime
-
 export HittingTime
 
 export Schedule
@@ -13,6 +12,7 @@ export LoweredSchedule
 
 export BrownianMotion
 export GeometricBrownianMotion
+export UnderlyingModel
 
 export Sample
 export LoweredSample
@@ -26,18 +26,10 @@ export get_history
 export plot
 export plot_lower
 
-include("Sampler/process.jl")
-include("Sampler/policy.jl")
-include("Sampler/scheduler.jl")
-include("Sampler/sampler.jl")
+
+
+include("sample.jl")
 include("utils.jl")
 include("plot.jl")
-
-using .Policy
-using .Scheduler
-using .Sampler
-using .Process
-using .Utils
-using .Plot
 
 end

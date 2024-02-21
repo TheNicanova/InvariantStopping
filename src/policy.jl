@@ -1,13 +1,4 @@
 
-module Policy
-
-export StoppingTime
-export DeterministicTime
-export HittingTime
-export get_all_timestamp
-export StoppingOpportunity
-
-
 
 # TODO: Make the interface of creating predicate more flexible. E.g. being able to define predicate by (x,y) -> ..., or (t, [x,y]) -> ....
 
@@ -27,7 +18,7 @@ end
 """
     StoppingTime
 
-A StoppingTime stops at the first [stopping opportunity](@ref StoppingOpportunity) for which its predicate returns true.
+A stopping time stops at the first  stopping opportunity for which its predicate returns true.
 
 It consists simply of a list of stopping opportunities.
 """
@@ -51,6 +42,9 @@ end
 
 # Stopping opportunity Methods
 
+"""
+    get_all_timestamp
+"""
 function get_all_timestamp(stopping_opportunity::StoppingOpportunity)
     return stopping_opportunity.timestamp_list
 end
@@ -72,7 +66,4 @@ Evalues the provided predicate at each timestamp in timestamp_list.
 """
 function HittingTime(timestamp_list, predicate)
     return StoppingTime([StoppingOpportunity([timestamp],predicate) for timestamp in timestamp_list])
-end
-
-
 end

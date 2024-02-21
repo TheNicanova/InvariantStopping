@@ -1,30 +1,10 @@
-module Process
-
-
-export State
-
-export forward
-export BrownianMotion
-export GeometricBrownianMotion
-export ModuloTwo
-export UnderlyingModel
-
-export forward
-
 using Distributions
 
 
 """
     State
 
-
-Fields
-
-    time: Represents concrete time.
-julia
-    coord: An N dimensional coordinate.
-
-    A state is an object that contains the time and coordinates of a given realization.
+Contains the coordinates of a given realization at a given time.
 """
 struct State{N, V <: Number}
   coord::NTuple{N, V}
@@ -33,8 +13,11 @@ end
 State(coord::Number) = State((coord,))
 
 
+"""
+  UnderlyingModel
 
-
+Abstract class for processes that implement the forward method.
+"""
 abstract type UnderlyingModel end
 
 """
@@ -58,6 +41,15 @@ struct ModuloTwo <: UnderlyingModel end
     BrownianMotion
 """
 struct BrownianMotion <: UnderlyingModel end
+
+
+"""
+  forward
+
+Simulate the process from the given state and given now to a later time. Returns the state generated at the later time.
+Subtype of UnderlyingModel are informally required to implement the forward method.
+"""
+function forward(state, now, later, ::UnderlyingModel) end
 
 
 
@@ -92,4 +84,3 @@ function forward(state::State{N,V}, now::T, later::T, underlying_model::Brownian
   return State{N,V}(new_coord)
 end
 
-end

@@ -1,19 +1,6 @@
-module Utils
-  
-export get_history
-export get_lower_history
-export get_all_trajectory
-
-export get_all_leaf
-
-export get_lower_history
-export get_lower_trajectory
-
-using ..Sampler
-
 
 """
-    get_history(::Sample)
+    get_history
   
 Returns the list of samples starting from the root to the provided sample.
 """
@@ -29,11 +16,10 @@ function get_history(sample::S) where {S}
 end
 
 """
-    get_all_leaf(::Sample)
+    get_all_leaf
 
 Returns a list of all leafs from the provided sample onward.
 """
-
 function get_all_leaf(sample)
   if isempty(sample.children) || isnothing(sample.children)
     return [sample]
@@ -43,7 +29,8 @@ function get_all_leaf(sample)
 end
 
 """
-    get_all_trajectory(::Sample)
+    get_all_trajectory
+  
 Returns a list of all trajectories from the provided sampled onward. A trajectory is a list of states from the provided sample onward to a leaf.
 """
 function get_all_trajectory(sample)
@@ -54,7 +41,6 @@ function get_all_trajectory(sample)
   end
   return trajectory_list
 end
-
 
 
 # Returns the trajectory from root to sample at the lowest level.
@@ -69,6 +55,4 @@ function get_all_lower_trajectory(sample)
     push!(trajectory_list, get_lower_history(leaf))
   end
   return trajectory_list
-end
-
 end

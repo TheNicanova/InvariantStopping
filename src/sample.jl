@@ -1,22 +1,11 @@
-
-module Sampler
-
-export find
-
-
-export Sample
-export LoweredSample
-export get_sample
-
-using ..Policy
-using ..Scheduler
-using ..Process
+include("process.jl")
+include("schedule.jl")
 
 
 """
     LoweredSample
 
-The unit of sampling. 
+A unit of sampling. 
 """
 struct LoweredSample{S <: State, T <: Number}
   state::S
@@ -55,7 +44,7 @@ function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::Stopp
 
     # Sample and chain lowered samples up to the target, if we are at target_timestamp already, this will do nothing
     for sampling_timestamp in sampling_timestamp_list
-        new_state = Process.forward(current_lowered_sample.state, current_lowered_sample.time, sampling_timestamp, process)
+        new_state = InvariantStopping.forward(current_lowered_sample.state, current_lowered_sample.time, sampling_timestamp, process)
         new_lowered_sample = LoweredSample(new_state, sampling_timestamp, LoweredSample{S,T}[], current_lowered_sample)
         push!(current_lowered_sample.children, new_lowered_sample)
         current_lowered_sample = new_lowered_sample
@@ -93,6 +82,7 @@ Depending on the answer, it either
   True :  creates a sample object, and branches into the children, then finish initialization of sample object
   False : continue the loop.
 """
+
 
 function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}, parent_sample, lowered_schedule::LoweredSchedule{T}, process::UnderlyingModel) where {S <: State, T}
 
@@ -141,6 +131,4 @@ function get_sample(state::State, schedule::Schedule{T}, process::UnderlyingMode
   lowered_sample = LoweredSample(state, lowered_schedule.timeline[1], LoweredSample{State,T}[], nothing) # Nothing for parent.
 
   return sample_helper(lowered_sample, nothing, lowered_schedule, process) # parent is set to nothing
-end
-
 end

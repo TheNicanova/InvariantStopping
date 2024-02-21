@@ -1,19 +1,8 @@
-module Scheduler
 
-export Schedule
-export Star
-export Tree
-
-export lower
-export LoweredSchedule
-
-export get_sampling_event_list
-export get_current_stopping_opportunity_index
-
-using ..Policy
+include("policy.jl")
 
 """
-  Schedule
+    Schedule
   
 Specifies a directed tree over stopping times.
 """
@@ -28,7 +17,7 @@ Schedule(stopping_time::StoppingTime) = Schedule(stopping_time, [])
 
 
 """
-  Tree
+    Tree
 
 Constructs a tree of schedule with provided branching factor.
 """
@@ -48,7 +37,7 @@ end
 Schedule(timestamp_list) = Tree(timestamp_list,1)
 
 """
-  Star
+    Star(::Any,::Integer)
 
 Constructs a tree where the branching factor is applied to the first timestamp only.
 """
@@ -83,9 +72,9 @@ end
 
 
 """
-    lower((::Schedule))
+    lower
 
-Recursively build [lowered schedule](@ref LoweredSchedule) from the provided schedule.
+Recursively build a lowered schedule from the provided schedule.
 """
 function lower(schedule::Schedule{T}) where {T}
     return lower_helper(schedule, T[])[1] # Setting parent_endtimestamp_list to empty list
@@ -143,6 +132,4 @@ function get_current_stopping_opportunity_index(current_timestamp::T, lowered_sc
     end
   end
   error("if no stopping opportunity is >= current_timestamp, this means current_timestamp > latest stopping opportunity")
-end
-
 end

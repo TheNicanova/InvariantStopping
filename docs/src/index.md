@@ -9,7 +9,6 @@ InvariantStopping can be installed by running
 using Pkg; Pkg.add("InvariantStopping")
 ```
 
-
 ## Usage example
 
 ```julia
@@ -126,8 +125,6 @@ schedule = Schedule(stopping_time_1, [Schedule(stopping_time_2)for _ in 1:10])
 sample = Sample(state,schedule, underlying_model)
 ```
 
-TODO: Attach image of plot(sample)
-TODO: Make predicate more stable, as of now it can only take a list of states, as opposed to the coordinates. Makes it hard to define predicates.
 
 ## Custom Process
 
