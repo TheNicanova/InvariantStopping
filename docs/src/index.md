@@ -1,41 +1,44 @@
 # Usage
 
-* Explore how optimal stopping problems transform under random-time coordinate transforms. *
+Explore how optimal stopping problems transform under random-time coordinate transforms.
 
 ## Installation
 
+
+
 InvariantStopping can be installed by running
 ```julia
-using Pkg; Pkg.add("InvariantStopping")
+using Pkg; 
+Pkg.add("InvariantStopping")
 ```
 
-## Usage example
 
-```julia
+You can validate the success of the installation by running the following.
+
+
+```@example 1
 using InvariantStopping
-```
 
-In order to generate samples, we must specify 3 things:
-* An initial state 
-* A schedule
-* A process
-
-```julia
+using Gadfly # hide
+set_default_plot_size(6inch, 4inch) # hide
 state = State(0.0) # x coord
-
-schedule = Schedule([0.0,1.0,2.0,3.0])
-
-process = BrownianMotion(); 
-
-sample = Sample(state, schedule, process)
+schedule = InvariantStopping.Tree(LinRange(0,100,4), 4)
+process = BrownianMotion()
+sample = get_sample(state, schedule, process)
+nothing # hide
 ```
 
-In the above we are sampling a realization of a 1D Brownian motion at times 0.0, 1.0, 2.0 and 3.0. We can visualize the sample using
 
-```julia
-plot(sample)
+```@example 1
+p = InvariantStopping.plot(sample) # Plot 1D
+draw(SVG("ternary_tree_1D.svg"), p); # hide
+nothing # hide
 ```
-![1D sample plot](assets/single_sample_1D.svg)
+
+![](ternary_tree_1D.svg)
+
+
+## Overview
 
 We can increase the dimension of our state space. Consider for instance
 ```julia
@@ -77,7 +80,7 @@ plot(star_sample)
 
 ![1D star plot](assets/star_plot_1D.svg)
 
-## Custom Schedule
+## Schedule
 
 Let's first take a look at the following
 
@@ -125,6 +128,4 @@ schedule = Schedule(stopping_time_1, [Schedule(stopping_time_2)for _ in 1:10])
 sample = Sample(state,schedule, underlying_model)
 ```
 
-
-## Custom Process
-
+## Process

@@ -1,5 +1,8 @@
 [deps]
+Cairo = "159f3aea-2a34-519c-b102-8c37f9878175"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Fontconfig = "186bb1d3-e1f7-5a2c-a377-96d770f13627"
+Gadfly = "c91e804a-d5a3-530f-b6f0-dfbca275c004"
 
 [compat]
 Documenter = "^1.1"
