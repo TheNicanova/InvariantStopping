@@ -46,7 +46,7 @@ struct BrownianMotion <: UnderlyingModel end
 """
   forward
 
-Simulate the process from the given state and given now to a later time. Returns the state generated at the later time.
+Simulate the process from the given state from now to a later time. Returns the state generated at the later time.
 Subtype of UnderlyingModel are informally required to implement the forward method.
 """
 function forward(state, now, later, ::UnderlyingModel) end

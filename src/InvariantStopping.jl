@@ -10,7 +10,7 @@ export HittingTime
 export Schedule
 export LoweredSchedule
 
-
+export forward
 export BrownianMotion
 export GeometricBrownianMotion
 export UnderlyingModel

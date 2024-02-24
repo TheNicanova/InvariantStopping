@@ -13,7 +13,7 @@ Pkg.add("InvariantStopping")
 ```
 
 
-You can validate the success of the installation by running the following.
+You can validate the success of the installation by running the following toy example.
 
 
 ```@example 1
@@ -22,12 +22,13 @@ using InvariantStopping
 using Gadfly # hide
 set_default_plot_size(6inch, 4inch) # hide
 state = State(0.0) # x coord
-schedule = InvariantStopping.Tree(LinRange(0,100,4), 4)
+schedule = InvariantStopping.Tree(LinRange(0,10,4), 4)
 process = BrownianMotion()
 sample = get_sample(state, schedule, process)
 nothing # hide
 ```
 
+The generated [`Sample`](@ref) is a tree of trajectories made by a standard 1 dimensional [`BrownianMotion`](@ref) initialized at given [`State`](@ref).
 
 ```@example 1
 p = InvariantStopping.plot(sample) # Plot 1D
@@ -40,92 +41,116 @@ nothing # hide
 
 ## Overview
 
-We can increase the dimension of our state space. Consider for instance
-```julia
-state_4D = State((0.0,0.0,0.0,0.0))
-sample_4D = Sample(state_4D, schedule, process) 
+This package's main purpose is to sample a process according to a directed tree over the space of stopping times.
+
+Perhaps the best way to understand the idea is with an example. Let's set 
+
+```@example 1
+state = State(0.0) 
+process = BrownianMotion()
+nothing # hide
 ```
-which samples a realization of a 4D Brownian motion. As opposed to plotting coordinate value against time, we can plot any pair of coordinates against each other. For instance
-```julia
-plot(sample_4D,[1,4])
-```
-produces a two dimensional plot where first coordinates are mapped onto the x axis and the fourth coordinates are mapped onto the y axis.
+as before, but instead of having a tree over [`DeterministicTime`](@ref) let us define a tree over more generic [`StoppingTime`](@ref).
 
-![2D sample plot](assets/single_sample_2D.svg)
+### Stopping Times
 
-We can specify schedule with increasing complexity. 
+To build our stopping , we first need a few predicates.
 
-```julia
-tree_schedule = InvariantStopping.Tree([0.0,1.0,2.0,3.0],3);
-
-tree_sample = Sample(state, tree_schedule, process);
-plot(tree_sample)
-```
-![1D ternary tree plot](assets/ternary_tree_plot.svg)
-
-And in 4D
-```julia
-ternary_sample_4D = Sample(state_4D, tree_schedule, process);
-plot(ternary_sample_4D,[1,4]) # Plotting coordinate 1 against coordinate 4
-```
-
-![2D ternary tree plot](assets/ternary_tree_plot_2D.svg)
-
-Schedule accepts LinRange as well. For instance
-```julia
-star_schedule = InvariantStopping(Star(LinRange(0,5,10),40));
-star_sample = Sample(state, star_schedule, process);
-plot(star_sample)
-```
-
-![1D star plot](assets/star_plot_1D.svg)
-
-## Schedule
-
-Let's first take a look at the following
-
-```julia
-schedule = InvariantStopping.Tree([0,1,2],3)
-sample = Sample(state, schedule, process)
-```
-This generates a tree of samples.
-
-![Ternary Tree](assets/custom_schedule_page1.svg)
-
-Note that the above tree can be interpreted as a tree of stopping times with deterministic stopping times.
-
-![Ternary Tree](assets/custom_schedule_page2.svg)
-
-These deterministic stopping times could be replaced by arbitary stopping times.
-
-![Ternary Tree](assets/custom_schedule_page3.svg)
-
-One can see that schedules can be made very general.
-
-![Ternary Tree](assets/custom_schedule_page4.svg)
-
-To craft our own schedule, we must first define a stopping time and the stopping opportunities it contained.
-
-
-### Stopping Time and Stopping Opportunity
-
- For instance
-
-```julia
-function predicate_1(x,y) 
-  return x - 2.0*y > 1.0
+```@example 1
+function small_deviation(t,state_list)
+  x = state_list[1].coord[1]  
+  return (x > 0.3) || t >= 10.0
 end
 
-function predicate_2(x,y)
-  return x + 1.0 > 0.5
+function medium_deviation(t,state_list)
+  x = state_list[1].coord[1]
+  return (x < -0.3) || t >= 10.0
 end
 
-stopping_time_1 = HittingTime(predicate_1, LinRange(0.0,10,20))
-stopping_time_2 = HittingTime(predicate_2, LinRange(0.0,10,20))
+function large_deviation(t,state_list)
+  x = state_list[1].coord[1]
+  return (abs(x) > 0.4) || t >= 10.0
+end
+```
+Then, we create  [`HittingTime`](@ref) constructor, we create three stopping times.
 
-schedule = Schedule(stopping_time_1, [Schedule(stopping_time_2)for _ in 1:10])
+```@example 1
+timelist = LinRange(0,10,100)
 
-sample = Sample(state,schedule, underlying_model)
+small_deviation_hit= HittingTime(timelist, small_deviation)
+medium_deviation_hit = HittingTime(timelist, medium_deviation)
+large_deviation_hit = HittingTime(timelist, large_deviation)
+nothing #hide
 ```
 
-## Process
+A hitting
+
+### Schedule
+
+We induce an ordering on our stopping times via a directed graph made of [`Schedule`](@ref) nodes.
+
+```@example 1
+deviation_escalation = Schedule(small_deviation_hit, [Schedule(medium_deviation_hit, [Schedule(large_deviation_hit) for _ in 1:10 ]) for _ in 1:10])
+
+schedule = Schedule(DeterministicTime(0.0), [deviation_escalation for _ in 1:10])
+nothing #hide
+```
+The above schedule defines a tree where each layer is populated by a single type of stopping time. Let's see what our original 1-dimensional Brownian motion looks like when sampled according to our newly defined schedule.
+
+```@example 1
+sample = get_sample(state, schedule, process)
+p = InvariantStopping.plot(sample) # Plot 1D
+draw(SVG("deviation_explosion.svg"), p); # hide
+nothing # hide
+```
+
+![](deviation_explosion.svg)
+
+What can observe that some paths were stopped before reaching the end.
+
+Note that this shows only the actual [`Sample`](@ref), as opposed to all the intermediate [`LoweredSample`](@ref) that were sampled in order to service the stopping times. If we want to include all the intermediate steps in our plot, we can do.
+
+```@example 1
+p = InvariantStopping.plot_lower(sample) # Plot 1D
+draw(SVG("lowered_deviation_explosion.svg"), p); # hide
+nothing # hide
+```
+
+![](lowered_deviation_explosion.svg)
+
+### State
+
+We could have chosen to simulate our Brownian motion in 4 Dimension as opposed to 2. 
+```@example 1
+state4D = State((0.0,0.0,0.0,0.0))
+sample4D = get_sample(state4D, schedule, process)
+nothing # hide
+```
+
+We plot our 4-dimensional process along its first two coordinates.
+
+```@example 1
+p = InvariantStopping.plot(sample4D,[1,2]) 
+draw(SVG("brownian_motion_4d.svg"), p); # hide
+nothing # hide
+```
+
+
+![](brownian_motion_4d.svg)
+
+And 
+
+```@example 1
+p = InvariantStopping.plot_lower(sample4D,[1,2]) 
+draw(SVG("lowered_brownian_motion_4d.svg"), p); # hide
+nothing # hide
+```
+
+
+![](lowered_brownian_motion_4d.svg)
+
+
+### Process
+
+We can also change the process, for instance [`GeometricBrownianMotion`](@ref). All one has to do to create their own process is to implement the [`forward`](@ref) method.
+

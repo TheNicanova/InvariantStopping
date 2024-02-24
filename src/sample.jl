@@ -34,7 +34,7 @@ function find(timestamp_list, lowered_sample::LoweredSample{S,T}, parent, lowere
 end
 
 
-function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::StoppingOpportunity{T}, lowered_schedule::LoweredSchedule{T}, process::UnderlyingModel) where {S <: State,T}
+function forward_lower(lowered_sample::LoweredSample{S,T}, stopping_opportunity::StoppingOpportunity{T}, lowered_schedule::LoweredSchedule{T}, process::UnderlyingModel) where {S <: State,T}
 
   target_timestamp = stopping_opportunity.timestamp_list[end]
 
@@ -44,7 +44,7 @@ function forward(lowered_sample::LoweredSample{S,T}, stopping_opportunity::Stopp
 
     # Sample and chain lowered samples up to the target, if we are at target_timestamp already, this will do nothing
     for sampling_timestamp in sampling_timestamp_list
-        new_state = InvariantStopping.forward(current_lowered_sample.state, current_lowered_sample.time, sampling_timestamp, process)
+        new_state = forward(current_lowered_sample.state, current_lowered_sample.time, sampling_timestamp, process)
         new_lowered_sample = LoweredSample(new_state, sampling_timestamp, LoweredSample{S,T}[], current_lowered_sample)
         push!(current_lowered_sample.children, new_lowered_sample)
         current_lowered_sample = new_lowered_sample
@@ -95,7 +95,7 @@ function sample_helper(parent_lowered_sample::Union{Nothing, LoweredSample{S,T}}
   for stopping_opportunity in lowered_schedule.stopping_time.stopping_opportunity_list[current_stopping_opportunity_index:end]
 
     # Sample and chain lowered samples up to the target
-    current_lowered_sample = forward(current_lowered_sample, stopping_opportunity, lowered_schedule, process)
+    current_lowered_sample = forward_lower(current_lowered_sample, stopping_opportunity, lowered_schedule, process)
   
 
     # After forwarding we have the condition that current_lowered_sample contains all the information needed to answer the stopping opportunity's predicate
