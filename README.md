@@ -1,2 +1,2 @@
 # InvariantStopping
-Investigating (in Julia) how optimal stopping problems transform under random-time coordinate transforms.
+Investigating how optimal stopping problems transform under random-time coordinate transforms. Documentation [here](https://thenicanova.github.io/InvariantStopping/dev/)
