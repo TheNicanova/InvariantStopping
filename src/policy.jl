@@ -49,7 +49,6 @@ function get_all_timestamp(stopping_opportunity::StoppingOpportunity)
     return stopping_opportunity.timestamp_list
 end
 
-# Stopping Time methods
 function get_all_timestamp(stopping_time::StoppingTime)
     list_of_list_of_timestamp = [get_all_timestamp(stopping_opportunity) for stopping_opportunity in stopping_time.stopping_opportunity_list]
     return sort!(union(list_of_list_of_timestamp...)) # the union will remove the duplicates if any

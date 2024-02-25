@@ -1,4 +1,4 @@
 ```@autodocs
 Modules = [InvariantStopping]
-Order   = [:function, :type]
+Order   = [:type, :function,]
 ```

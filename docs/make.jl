@@ -6,9 +6,8 @@ makedocs(
   format=Documenter.HTML(),
   pages=[
     "Usage" => "index.md",
-    "Reference" =>"reference.md",
     "Dev" => "dev.md",
-    "Appendix: Docstring Guidelines" => "docstring_guidelines.md"
+    "Reference" =>"reference.md"
   ]
 )
 
