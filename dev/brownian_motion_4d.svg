@@ -14,21 +14,26 @@
     <path d="M0,0 L15,3.5 L0,7 z" stroke="context-stroke" fill="context-stroke"/>
   </marker>
 </defs>
-<g class="plotroot xscalable yscalable" id="img-c7c7903d-1">
-  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-c7c7903d-2">
+<g class="plotroot xscalable yscalable" id="img-4ca5f314-1">
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-4ca5f314-2">
     <g transform="translate(82.4,89.99)">
       <g class="primitive">
         <text text-anchor="middle" dy="0.6em">x Coord</text>
       </g>
     </g>
   </g>
-  <g class="guide xlabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-c7c7903d-3">
+  <g class="guide xlabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-4ca5f314-3">
     <g transform="translate(19.4,83.32)">
+      <g class="primitive">
+        <text text-anchor="middle" dy="0.6em">-3</text>
+      </g>
+    </g>
+    <g transform="translate(40.4,83.32)">
       <g class="primitive">
         <text text-anchor="middle" dy="0.6em">-2</text>
       </g>
     </g>
-    <g transform="translate(50.9,83.32)">
+    <g transform="translate(61.4,83.32)">
       <g class="primitive">
         <text text-anchor="middle" dy="0.6em">-1</text>
       </g>
@@ -38,384 +43,403 @@
         <text text-anchor="middle" dy="0.6em">0</text>
       </g>
     </g>
-    <g transform="translate(113.9,83.32)">
+    <g transform="translate(103.4,83.32)">
       <g class="primitive">
         <text text-anchor="middle" dy="0.6em">1</text>
       </g>
     </g>
-    <g transform="translate(145.4,83.32)">
+    <g transform="translate(124.4,83.32)">
       <g class="primitive">
         <text text-anchor="middle" dy="0.6em">2</text>
       </g>
     </g>
+    <g transform="translate(145.4,83.32)">
+      <g class="primitive">
+        <text text-anchor="middle" dy="0.6em">3</text>
+      </g>
+    </g>
   </g>
-  <g clip-path="url(#img-c7c7903d-4)">
-    <g id="img-c7c7903d-5">
-      <g pointer-events="visible" stroke-width="0.3" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="img-c7c7903d-6">
-        <g transform="translate(82.4,46.46)" id="img-c7c7903d-7">
+  <g clip-path="url(#img-4ca5f314-4)">
+    <g id="img-4ca5f314-5">
+      <g pointer-events="visible" stroke-width="0.3" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="img-4ca5f314-6">
+        <g transform="translate(82.4,46.46)" id="img-4ca5f314-7">
           <path d="M-65,-35.85 L65,-35.85 65,35.85 -65,35.85  z" class="primitive"/>
         </g>
       </g>
-      <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-c7c7903d-8">
-        <g transform="translate(82.4,80.32)" id="img-c7c7903d-9">
+      <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-4ca5f314-8">
+        <g transform="translate(82.4,80.32)" id="img-4ca5f314-9">
           <path fill="none" d="M-65,0 L65,0 " class="primitive"/>
         </g>
-        <g transform="translate(82.4,63.39)" id="img-c7c7903d-10">
+        <g transform="translate(82.4,66.77)" id="img-4ca5f314-10">
           <path fill="none" d="M-65,0 L65,0 " class="primitive"/>
         </g>
-        <g transform="translate(82.4,46.46)" id="img-c7c7903d-11">
+        <g transform="translate(82.4,53.23)" id="img-4ca5f314-11">
           <path fill="none" d="M-65,0 L65,0 " class="primitive"/>
         </g>
-        <g transform="translate(82.4,29.54)" id="img-c7c7903d-12">
+        <g transform="translate(82.4,39.69)" id="img-4ca5f314-12">
           <path fill="none" d="M-65,0 L65,0 " class="primitive"/>
         </g>
-        <g transform="translate(82.4,12.61)" id="img-c7c7903d-13">
+        <g transform="translate(82.4,26.15)" id="img-4ca5f314-13">
+          <path fill="none" d="M-65,0 L65,0 " class="primitive"/>
+        </g>
+        <g transform="translate(82.4,12.61)" id="img-4ca5f314-14">
           <path fill="none" d="M-65,0 L65,0 " class="primitive"/>
         </g>
       </g>
-      <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-c7c7903d-14">
-        <g transform="translate(19.4,46.46)" id="img-c7c7903d-15">
+      <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="img-4ca5f314-15">
+        <g transform="translate(19.4,46.46)" id="img-4ca5f314-16">
           <path fill="none" d="M0,-35.85 L0,35.85 " class="primitive"/>
         </g>
-        <g transform="translate(50.9,46.46)" id="img-c7c7903d-16">
+        <g transform="translate(40.4,46.46)" id="img-4ca5f314-17">
           <path fill="none" d="M0,-35.85 L0,35.85 " class="primitive"/>
         </g>
-        <g transform="translate(82.4,46.46)" id="img-c7c7903d-17">
+        <g transform="translate(61.4,46.46)" id="img-4ca5f314-18">
           <path fill="none" d="M0,-35.85 L0,35.85 " class="primitive"/>
         </g>
-        <g transform="translate(113.9,46.46)" id="img-c7c7903d-18">
+        <g transform="translate(82.4,46.46)" id="img-4ca5f314-19">
           <path fill="none" d="M0,-35.85 L0,35.85 " class="primitive"/>
         </g>
-        <g transform="translate(145.4,46.46)" id="img-c7c7903d-19">
+        <g transform="translate(103.4,46.46)" id="img-4ca5f314-20">
+          <path fill="none" d="M0,-35.85 L0,35.85 " class="primitive"/>
+        </g>
+        <g transform="translate(124.4,46.46)" id="img-4ca5f314-21">
+          <path fill="none" d="M0,-35.85 L0,35.85 " class="primitive"/>
+        </g>
+        <g transform="translate(145.4,46.46)" id="img-4ca5f314-22">
           <path fill="none" d="M0,-35.85 L0,35.85 " class="primitive"/>
         </g>
       </g>
-      <g class="plotpanel" id="img-c7c7903d-20">
+      <g class="plotpanel" id="img-4ca5f314-23">
         <metadata>
           <boundingbox value="17.39833333333334mm 10.611666666666665mm 130.00166666666664mm 71.70333333333333mm"/>
-          <unitbox value="-2.0634912236610625 2.118162572005317 4.126982447322125 -4.236325144010634"/>
+          <unitbox value="-3.095236835491594 2.1477032150066466 6.190473670983188 -5.295406430013293"/>
         </metadata>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-21">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-22">
-            <g transform="translate(70.93,58.46)" id="img-c7c7903d-23">
-              <path fill="none" d="M11.47,-12 L-5.73,6 -5.73,6 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-24">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-25">
+            <g transform="translate(80.32,38.17)" id="img-4ca5f314-26">
+              <path fill="none" d="M2.08,1.52 L-1.04,-0.76 -1.04,-0.76 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-24">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-25">
-            <g transform="translate(70.93,58.46)" id="img-c7c7903d-26">
-              <path fill="none" d="M11.47,-12 L-5.73,6 -5.73,6 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-27">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-28">
+            <g transform="translate(80.32,38.17)" id="img-4ca5f314-29">
+              <path fill="none" d="M2.08,1.52 L-1.04,-0.76 -1.04,-0.76 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-27">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-28">
-            <g transform="translate(70.77,35.95)" id="img-c7c7903d-29">
-              <path fill="none" d="M11.63,10.52 L-5.82,-5.26 -5.82,-5.26 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-30">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-31">
+            <g transform="translate(89.95,37.87)" id="img-4ca5f314-32">
+              <path fill="none" d="M-7.55,1.82 L14.96,-1.24 -7.41,-0.58 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-30">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-31">
-            <g transform="translate(70.77,35.95)" id="img-c7c7903d-32">
-              <path fill="none" d="M11.63,10.52 L-5.82,-5.26 -5.82,-5.26 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-33">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-34">
+            <g transform="translate(93.25,37.74)" id="img-4ca5f314-35">
+              <path fill="none" d="M-10.85,1.95 L11.65,-1.11 -0.8,-0.84 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-33">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-34">
-            <g transform="translate(91.65,34.14)" id="img-c7c7903d-35">
-              <path fill="none" d="M-9.25,12.32 L4.62,-6.16 4.62,-6.16 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-36">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-37">
+            <g transform="translate(95.94,39.12)" id="img-4ca5f314-38">
+              <path fill="none" d="M-13.54,0.57 L7.67,3.69 5.86,-4.26 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-36">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-37">
-            <g transform="translate(91.65,34.14)" id="img-c7c7903d-38">
-              <path fill="none" d="M-9.25,12.32 L4.62,-6.16 4.62,-6.16 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-39">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-40">
+            <g transform="translate(105.68,44.09)" id="img-4ca5f314-41">
+              <path fill="none" d="M-23.28,-4.39 L-2.07,-1.27 25.35,5.66 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-39">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-40">
-            <g transform="translate(70.33,63.36)" id="img-c7c7903d-41">
-              <path fill="none" d="M12.07,-16.89 L-6.03,8.45 -6.03,8.45 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-42">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-43">
+            <g transform="translate(72.02,33.02)" id="img-4ca5f314-44">
+              <path fill="none" d="M10.38,6.67 L-5.19,-3.33 -5.19,-3.33 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-42">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-43">
-            <g transform="translate(70.33,63.36)" id="img-c7c7903d-44">
-              <path fill="none" d="M12.07,-16.89 L-6.03,8.45 -6.03,8.45 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-45">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-46">
+            <g transform="translate(72.02,33.02)" id="img-4ca5f314-47">
+              <path fill="none" d="M10.38,6.67 L-5.19,-3.33 -5.19,-3.33 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-45">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-46">
-            <g transform="translate(93.19,39.91)" id="img-c7c7903d-47">
-              <path fill="none" d="M-10.79,6.55 L5.4,-3.27 5.4,-3.27 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-48">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-49">
+            <g transform="translate(99.2,38.03)" id="img-4ca5f314-50">
+              <path fill="none" d="M-16.8,1.67 L6.51,-2.59 10.29,0.92 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-48">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-49">
-            <g transform="translate(93.19,39.91)" id="img-c7c7903d-50">
-              <path fill="none" d="M-10.79,6.55 L5.4,-3.27 5.4,-3.27 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-51">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-52">
+            <g transform="translate(98.04,37.14)" id="img-4ca5f314-53">
+              <path fill="none" d="M-15.65,2.55 L7.66,-1.7 7.99,-0.85 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-51">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-52">
-            <g transform="translate(91.94,55.9)" id="img-c7c7903d-53">
-              <path fill="none" d="M-9.54,-9.44 L4.77,4.72 4.77,4.72 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-54">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-55">
+            <g transform="translate(68.66,51.94)" id="img-4ca5f314-56">
+              <path fill="none" d="M13.74,-12.25 L-10.51,-13.74 -3.23,25.99 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-54">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-55">
-            <g transform="translate(91.94,55.9)" id="img-c7c7903d-56">
-              <path fill="none" d="M-9.54,-9.44 L4.77,4.72 4.77,4.72 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-57">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-58">
+            <g transform="translate(74.29,39.35)" id="img-4ca5f314-59">
+              <path fill="none" d="M8.11,0.34 L-16.15,-1.15 8.04,0.81 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-57">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-58">
-            <g transform="translate(98.45,49.6)" id="img-c7c7903d-59">
-              <path fill="none" d="M-16.05,-3.14 L16.91,1.95 -0.86,1.19 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-60">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-61">
+            <g transform="translate(88.54,43.69)" id="img-4ca5f314-62">
+              <path fill="none" d="M-6.14,-4 L3.07,2 3.07,2 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-60">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-61">
-            <g transform="translate(106.03,46.89)" id="img-c7c7903d-62">
-              <path fill="none" d="M-23.63,-0.43 L9.33,4.66 14.3,-4.23 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-63">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-64">
+            <g transform="translate(88.54,43.69)" id="img-4ca5f314-65">
+              <path fill="none" d="M-6.14,-4 L3.07,2 3.07,2 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-63">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-64">
-            <g transform="translate(61.08,48.11)" id="img-c7c7903d-65">
-              <path fill="none" d="M21.32,-1.65 L-11.11,3.38 -10.22,-1.73 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-66">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-67">
+            <g transform="translate(100.01,39.54)" id="img-4ca5f314-68">
+              <path fill="none" d="M-17.61,0.16 L4.35,2.65 13.26,-2.81 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-66">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-67">
-            <g transform="translate(65.74,49)" id="img-c7c7903d-68">
-              <path fill="none" d="M16.66,-2.54 L-15.77,2.5 -0.89,0.04 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-69">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-70">
+            <g transform="translate(94.64,44.27)" id="img-4ca5f314-71">
+              <path fill="none" d="M-12.24,-4.58 L9.72,-2.08 2.53,6.66 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-69">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-70">
-            <g transform="translate(75.26,30.3)" id="img-c7c7903d-71">
-              <path fill="none" d="M7.14,16.16 L-3.57,-8.08 -3.57,-8.08 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-72">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-73">
+            <g transform="translate(66.1,42.86)" id="img-4ca5f314-74">
+              <path fill="none" d="M16.3,-3.17 L-5.64,0.81 -10.66,2.36 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-72">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-73">
-            <g transform="translate(75.26,30.3)" id="img-c7c7903d-74">
-              <path fill="none" d="M7.14,16.16 L-3.57,-8.08 -3.57,-8.08 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-75">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-76">
+            <g transform="translate(74.85,38.75)" id="img-4ca5f314-77">
+              <path fill="none" d="M7.55,0.94 L-14.38,4.92 6.83,-5.86 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-75">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-76">
-            <g transform="translate(63.51,29.35)" id="img-c7c7903d-77">
-              <path fill="none" d="M18.89,17.11 L-14.02,-11.96 -4.87,-5.16 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-78">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-79">
+            <g transform="translate(59.3,30.55)" id="img-4ca5f314-80">
+              <path fill="none" d="M23.1,9.14 L0.81,-5.51 -23.92,-3.63 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-78">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-79">
-            <g transform="translate(64.48,27.32)" id="img-c7c7903d-80">
-              <path fill="none" d="M17.92,19.15 L-14.99,-9.92 -2.93,-9.23 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-81">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-82">
+            <g transform="translate(63.22,28.75)" id="img-4ca5f314-83">
+              <path fill="none" d="M19.18,10.94 L-3.11,-3.71 -16.07,-7.24 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-81">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-82">
-            <g transform="translate(98.15,50.89)" id="img-c7c7903d-83">
-              <path fill="none" d="M-15.75,-4.42 L16.45,3.61 -0.7,0.81 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-84">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-85">
+            <g transform="translate(68.33,37.86)" id="img-4ca5f314-86">
+              <path fill="none" d="M14.07,1.83 L-7.39,-1.32 -6.68,-0.51 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-84">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-85">
-            <g transform="translate(99.83,56.79)" id="img-c7c7903d-86">
-              <path fill="none" d="M-17.43,-10.33 L14.76,-2.29 2.67,12.62 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-87">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-88">
+            <g transform="translate(72.38,35.58)" id="img-4ca5f314-89">
+              <path fill="none" d="M10.02,4.11 L-11.44,0.96 1.42,-5.07 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-87">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-88">
-            <g transform="translate(105.27,60.94)" id="img-c7c7903d-89">
-              <path fill="none" d="M-22.87,-14.47 L9.66,1.62 13.21,12.85 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-90">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-91">
+            <g transform="translate(101.45,37.89)" id="img-4ca5f314-92">
+              <path fill="none" d="M-19.05,1.8 L2.73,-4.88 16.33,3.08 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-90">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-91">
-            <g transform="translate(100.04,58.75)" id="img-c7c7903d-92">
-              <path fill="none" d="M-17.64,-12.29 L14.89,3.81 2.75,8.47 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-93">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-94">
+            <g transform="translate(90.71,35.67)" id="img-4ca5f314-95">
+              <path fill="none" d="M-8.31,4.03 L13.47,-2.66 -5.16,-1.37 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-93">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-94">
-            <g transform="translate(111.3,50.14)" id="img-c7c7903d-95">
-              <path fill="none" d="M-28.9,-3.68 L8.21,1.63 20.69,2.05 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-96">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-97">
+            <g transform="translate(68.12,52.4)" id="img-4ca5f314-98">
+              <path fill="none" d="M14.28,-12.71 L-7.5,9.9 -6.78,2.81 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-96">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-97">
-            <g transform="translate(110.86,46.3)" id="img-c7c7903d-98">
-              <path fill="none" d="M-28.46,0.16 L8.64,5.48 19.82,-5.64 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-99">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-100">
+            <g transform="translate(67.03,56.53)" id="img-4ca5f314-101">
+              <path fill="none" d="M15.37,-16.84 L-6.41,5.77 -8.96,11.07 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-99">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-100">
-            <g transform="translate(61.64,52.44)" id="img-c7c7903d-101">
-              <path fill="none" d="M20.76,-5.97 L-11.32,-1.07 -9.43,7.04 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-102">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-103">
+            <g transform="translate(87.17,51.95)" id="img-4ca5f314-104">
+              <path fill="none" d="M-4.77,-12.25 L16.71,3.66 -11.94,8.6 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-102">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-103">
-            <g transform="translate(50.9,52.63)" id="img-c7c7903d-104">
-              <path fill="none" d="M31.5,-6.16 L-0.59,-1.26 -30.91,7.43 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-105">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-106">
+            <g transform="translate(96.53,49.4)" id="img-4ca5f314-107">
+              <path fill="none" d="M-14.13,-9.7 L7.35,6.21 6.79,3.5 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-105">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-106">
-            <g transform="translate(68.05,48.02)" id="img-c7c7903d-107">
-              <path fill="none" d="M14.35,-1.55 L-18.34,-2.83 3.99,4.39 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-108">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-109">
+            <g transform="translate(82.61,37.61)" id="img-4ca5f314-110">
+              <path fill="none" d="M-0.21,2.08 L0.1,-1.04 0.1,-1.04 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-108">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-109">
-            <g transform="translate(73.26,46.76)" id="img-c7c7903d-110">
-              <path fill="none" d="M9.14,-0.3 L-23.56,-1.58 14.42,1.88 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-111">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-112">
+            <g transform="translate(82.61,37.61)" id="img-4ca5f314-113">
+              <path fill="none" d="M-0.21,2.08 L0.1,-1.04 0.1,-1.04 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-111">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-112">
-            <g transform="translate(66.42,51.15)" id="img-c7c7903d-113">
-              <path fill="none" d="M15.98,-4.69 L-17.67,5.37 1.69,-0.69 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-114">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-115">
+            <g transform="translate(83.65,27.15)" id="img-4ca5f314-116">
+              <path fill="none" d="M-1.25,12.54 L0.62,-6.27 0.62,-6.27 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-114">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-115">
-            <g transform="translate(58.91,49.98)" id="img-c7c7903d-116">
-              <path fill="none" d="M23.49,-3.51 L-10.16,6.55 -13.32,-3.03 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-117">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-118">
+            <g transform="translate(83.65,27.15)" id="img-4ca5f314-119">
+              <path fill="none" d="M-1.25,12.54 L0.62,-6.27 0.62,-6.27 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-117">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-118">
-            <g transform="translate(64.39,43.57)" id="img-c7c7903d-119">
-              <path fill="none" d="M18.01,2.89 L-9,-1.45 -9,-1.45 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-120">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-121">
+            <g transform="translate(99.99,37.05)" id="img-4ca5f314-122">
+              <path fill="none" d="M-17.59,2.64 L3.67,-0.78 13.92,-1.86 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-120">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-121">
-            <g transform="translate(64.39,43.57)" id="img-c7c7903d-122">
-              <path fill="none" d="M18.01,2.89 L-9,-1.45 -9,-1.45 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-123">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-124">
+            <g transform="translate(100.11,38.95)" id="img-4ca5f314-125">
+              <path fill="none" d="M-17.71,0.74 L3.56,-2.68 14.15,1.94 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-123">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-124">
-            <g transform="translate(109.09,50.13)" id="img-c7c7903d-125">
-              <path fill="none" d="M-26.69,-3.66 L4.88,1.82 21.82,1.84 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-126">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-127">
+            <g transform="translate(97.17,53.81)" id="img-4ca5f314-128">
+              <path fill="none" d="M-14.77,-14.12 L8.74,3.64 6.03,10.48 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-126">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-127">
-            <g transform="translate(96.82,47.61)" id="img-c7c7903d-128">
-              <path fill="none" d="M-14.42,-1.15 L17.15,4.33 -2.73,-3.18 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-129">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-130">
+            <g transform="translate(97.2,53.1)" id="img-4ca5f314-131">
+              <path fill="none" d="M-14.8,-13.41 L8.71,4.35 6.09,9.06 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-129">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-130">
-            <g transform="translate(65.96,51.43)" id="img-c7c7903d-131">
-              <path fill="none" d="M16.44,-4.97 L-8.22,2.48 -8.22,2.48 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-132">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-133">
+            <g transform="translate(81.01,53.95)" id="img-4ca5f314-134">
+              <path fill="none" d="M1.39,-14.26 L-0.7,7.13 -0.7,7.13 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-132">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-133">
-            <g transform="translate(65.96,51.43)" id="img-c7c7903d-134">
-              <path fill="none" d="M16.44,-4.97 L-8.22,2.48 -8.22,2.48 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-135">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-136">
+            <g transform="translate(81.01,53.95)" id="img-4ca5f314-137">
+              <path fill="none" d="M1.39,-14.26 L-0.7,7.13 -0.7,7.13 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-135">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-136">
-            <g transform="translate(74.13,51.05)" id="img-c7c7903d-137">
-              <path fill="none" d="M8.27,-4.59 L-4.13,2.3 -4.13,2.3 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-138">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-139">
+            <g transform="translate(69.36,44.65)" id="img-4ca5f314-140">
+              <path fill="none" d="M13.04,-4.96 L-9.78,1.14 -3.26,3.81 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-c7c7903d-138">
-          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-c7c7903d-139">
-            <g transform="translate(74.13,51.05)" id="img-c7c7903d-140">
-              <path fill="none" d="M8.27,-4.59 L-4.13,2.3 -4.13,2.3 " class="primitive"/>
+        <g stroke-width="0.3" fill="#000000" fill-opacity="0.000" class="geometry" id="img-4ca5f314-141">
+          <g class="color_LCHab{Float32}(70.0f0,60.0f0,240.0f0)" stroke-dasharray="none" stroke-opacity="1" stroke="#00BFFF" id="img-4ca5f314-142">
+            <g transform="translate(61.03,42.02)" id="img-4ca5f314-143">
+              <path fill="none" d="M21.37,-2.33 L-1.45,3.77 -19.93,-1.45 " class="primitive"/>
             </g>
           </g>
         </g>
-        <g class="geometry" id="img-c7c7903d-141">
+        <g class="geometry" id="img-4ca5f314-144">
         </g>
       </g>
     </g>
   </g>
-  <g class="guide ylabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-c7c7903d-142">
-    <g transform="translate(16.4,80.32)" id="img-c7c7903d-143">
+  <g class="guide ylabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="img-4ca5f314-145">
+    <g transform="translate(16.4,80.32)" id="img-4ca5f314-146">
+      <g class="primitive">
+        <text text-anchor="end" dy="0.35em">-3</text>
+      </g>
+    </g>
+    <g transform="translate(16.4,66.77)" id="img-4ca5f314-147">
       <g class="primitive">
         <text text-anchor="end" dy="0.35em">-2</text>
       </g>
     </g>
-    <g transform="translate(16.4,63.39)" id="img-c7c7903d-144">
+    <g transform="translate(16.4,53.23)" id="img-4ca5f314-148">
       <g class="primitive">
         <text text-anchor="end" dy="0.35em">-1</text>
       </g>
     </g>
-    <g transform="translate(16.4,46.46)" id="img-c7c7903d-145">
+    <g transform="translate(16.4,39.69)" id="img-4ca5f314-149">
       <g class="primitive">
         <text text-anchor="end" dy="0.35em">0</text>
       </g>
     </g>
-    <g transform="translate(16.4,29.54)" id="img-c7c7903d-146">
+    <g transform="translate(16.4,26.15)" id="img-4ca5f314-150">
       <g class="primitive">
         <text text-anchor="end" dy="0.35em">1</text>
       </g>
     </g>
-    <g transform="translate(16.4,12.61)" id="img-c7c7903d-147">
+    <g transform="translate(16.4,12.61)" id="img-4ca5f314-151">
       <g class="primitive">
         <text text-anchor="end" dy="0.35em">2</text>
       </g>
     </g>
   </g>
-  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-c7c7903d-148">
-    <g transform="translate(8.81,44.46)" id="img-c7c7903d-149">
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-4ca5f314-152">
+    <g transform="translate(8.81,44.46)" id="img-4ca5f314-153">
       <g class="primitive">
         <text text-anchor="middle" dy="0.35em" transform="rotate(-90,0, 2)">y Coord</text>
       </g>
     </g>
   </g>
-  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-c7c7903d-150">
-    <g transform="translate(82.4,5)" id="img-c7c7903d-151">
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="img-4ca5f314-154">
+    <g transform="translate(82.4,5)" id="img-4ca5f314-155">
       <g class="primitive">
         <text text-anchor="middle" dy="0.6em">2D plot of selected coordinates</text>
       </g>
@@ -423,7 +447,7 @@
   </g>
 </g>
 <defs>
-  <clipPath id="img-c7c7903d-4">
+  <clipPath id="img-4ca5f314-4">
     <path d="M17.4,10.61 L147.4,10.61 147.4,82.32 17.4,82.32 " />
   </clipPath>
 </defs>
