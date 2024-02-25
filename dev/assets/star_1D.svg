@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:gadfly="http://www.gadflyjl.org/ns"
+     version="1.2"
+     width="141.42mm" height="100mm" viewBox="0 0 141.42 100"
+     stroke="none"
+     fill="#000000"
+     stroke-width="0.3"
+     font-size="3.88"
+>
+<defs>
+  <marker id="arrow" markerWidth="15" markerHeight="7" refX="5" refY="3.5" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L15,3.5 L0,7 z" stroke="context-stroke" fill="context-stroke"/>
+  </marker>
+</defs>
+<g class="plotroot xscalable" id="img-8a79c7ad-1">
+  <g clip-path="url(#img-8a79c7ad-2)">
+    <g id="img-8a79c7ad-3">
+      <g pointer-events="visible" stroke-width="0.3" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="img-8a79c7ad-4">
+        <g transform="translate(70.71,50)" id="img-8a79c7ad-5">
+          <path d="M-65.71,-45 L65.71,-45 65.71,45 -65.71,45  z" class="primitive"/>
+        </g>
+      </g>
+      <g class="plotpanel" id="img-8a79c7ad-6">
+        <metadata>
+          <boundingbox value="5.0mm 5.0mm 131.4213562373095mm 90.0mm"/>
+          <unitbox value="-0.015695955992457027 1.0232558139534884 1.031391911984914 -1.0465116279069768"/>
+        </metadata>
+        <g class="geometry" id="img-8a79c7ad-7">
+        </g>
+      </g>
+    </g>
+  </g>
+</g>
+<defs>
+  <clipPath id="img-8a79c7ad-2">
+    <path d="M5,5 L136.42,5 136.42,95 5,95 " />
+  </clipPath>
+</defs>
+</svg>
